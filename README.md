@@ -18,8 +18,6 @@ A RAG (Retrieval-Augmented Generation) foundation for **PariShiksha** — an edt
 
 ## Corpus Coverage
 
-
-|---------|-------|--------------|
 | Chapter | Topic                         | Key Concepts                                                                            |
 | ------- | ----------------------------- | --------------------------------------------------------------------------------------- |
 | Ch 1    | Matter in Our Surroundings    | States of matter, particle nature, diffusion, evaporation, latent heat, temperature     |
@@ -293,10 +291,17 @@ ncert_v2/
 
 ## Backup Corpus
 
-If `ncert.nic.in` is unreachable, use **OpenStax College Physics** (CC-BY licensed):
+If `ncert.nic.in` is unreachable, use **OpenStax College Physics** (CC-BY licensed):  
 https://github.com/philschatz/physics-book
 
-Result:
+---
+
+## Sample Pipeline Output
+
+<details>
+<summary>Click to expand full run output</summary>
+
+```
 ══════════════════════════════════════════════════════════════════════
 ║               NCERT Class 9 Physics RAG                            ║
 ══════════════════════════════════════════════════════════════════════
@@ -313,7 +318,6 @@ Result:
 ──────────────────────────────────────────────────────────────────────
 
   ▸ Importing corpus module …
-
   ▸ Importing stage 1 functions …
 
   ──────────────────────────────────────────────────────────────────
@@ -383,36 +387,20 @@ The mismatch risk is highest when combining BM25 scores with neural scores.
     EXAMPLE 8.1
     An object travels 16 m in 4 s and then another 16 m in 2 s. What is the
     average speed of the object?
-    
+
     Solution:
     Total distance = 16 + 16 = 32 m
     Total time = 4 + 2 = 6 s
     Average speed = 32 / 6 = 5.33 m s-1
-  ✓ Saved → C:\Users\shubh\Project\ncert_rag_STandBM25\chunks\all_chunks.json  (36 chunks)
+  ✓ Saved → chunks/all_chunks.json  (36 chunks)
 
 ──────────────────────────────────────────────────────────────────────
   STAGE 2  DUAL RETRIEVAL  (BM25 + Sentence Transformer + Hybrid RRF)
 ──────────────────────────────────────────────────────────────────────
 
-  ▸ Importing retrieval classes …
-
-  ──────────────────────────────────────────────────────────────────
-  2A  Building BM25 Index
-  ──────────────────────────────────────────────────────────────────
-  BM25: 36 chunks, avg 80 tokens/chunk
-
-  ──────────────────────────────────────────────────────────────────
-  2B  Building Sentence Transformer (TF-IDF semantic vectors)
-  ──────────────────────────────────────────────────────────────────
-  SentenceTransformer: 36 chunks × 3065 vocab dims
-  ✓ Vocab size: 3065 dimensions  |  Matrix: 36 × 3065
-
-  ──────────────────────────────────────────────────────────────────
-  2C  Building Hybrid Retriever (BM25 + Semantic via RRF k=60)
-  ──────────────────────────────────────────────────────────────────
-  BM25: 36 chunks, avg 80 tokens/chunk
-  SentenceTransformer: 36 chunks × 3065 vocab dims
-  Hybrid retriever ready (36 chunks)
+  2A  BM25 Index: 36 chunks, avg 80 tokens/chunk
+  2B  SentenceTransformer: 36 chunks × 3065 vocab dims
+  2C  Hybrid retriever ready (36 chunks)
 
   ──────────────────────────────────────────────────────────────────
   Retriever Comparison  (5 test queries)
@@ -420,182 +408,55 @@ The mismatch risk is highest when combining BM25 scores with neural scores.
   Query                                          BM25   Semantic   Hybrid
   ────────────────────────────────────────────────────────────────────
   What is Newton's second law of motion?            ✓          ✓        ✓
-  ↳ Direct keyword match — BM25 should win  
   How fast does velocity change when force          ✗          ✗        ✗
-  ↳ Paraphrased — Semantic should help      
   Why does a ship float but a stone sinks?          ✓          ✓        ✓
-  ↳ Conceptual — no exact term 'float' in section title
   Calculate kinetic energy of a 15 kg obje          ✓          ✓        ✓
-  ↳ Calculation with numbers — BM25 numbers + Semantic concept
   What is the minimum distance for an echo          ✓          ✓        ✓
-  ↳ Specific fact — should hit Ch12 sound content
   ────────────────────────────────────────────────────────────────────
   Correct rank-1                                    4          4        4 / 5
-
-  ──────────────────────────────────────────────────────────────────
-  Detailed comparison: 'What is Newton's second law?'
-  ──────────────────────────────────────────────────────────────────
-
-Query: 'What is Newton's second law?'
-
-Rank   BM25 top chunks                        Semantic top chunks                    Hybrid top chunks
-──────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  1  9.3 SECOND LAW OF MOTION (7.95)        9.3 SECOND LAW OF MOTION (0.229)       9.3 SECOND LAW OF MOTION (0.0328)
-  2  9.3 SECOND LAW OF MOTION (4.79)        9.3 SECOND LAW OF MOTION (0.066)       9.3 SECOND LAW OF MOTION (0.0323)
-  3  10.2 FREE FALL (4.62)                  8.4 RATE OF CHANGE OF VELOCITY (0.059) 9.5 CONSERVATION OF MOMENTUM (0.0310)
-  ✓ Hybrid retriever ready
 
 ──────────────────────────────────────────────────────────────────────
   STAGE 3  GROUNDED ANSWER GENERATION
 ──────────────────────────────────────────────────────────────────────
 
-  ▸ Importing generation module …
-
-  ──────────────────────────────────────────────────────────────────
-  Prompt V1 vs V2 — why the refusal instruction changed
-  ──────────────────────────────────────────────────────────────────
-
-  V1 (permissive — what most people write first):
-    You are a study assistant for NCERT Class 9 Science.
-    Answer the student's question using ONLY the provided context.
-    
-    Context:
-
-  V2 (constraint — explicit refuse rule + prescribed text):
-    You are a study assistant for NCERT Class 9 Science.
-    You have access to retrieved passages from Chapters 8–12 (Physics).
-    
-    STRICT RULES:
-    1. Answer ONLY if the retrieved context directly answers the question.
-    2. If the context does NOT contain the answer, say exactly:
-       "This information is not in the provided chapters. Please refer to the relevant chapter."
-    3. Never use knowledge outside the retrieved context.
-
-    Key change: V1 says 'answer using ONLY context' — the LLM
-    reads this as a preference. V2 says 'Answer ONLY IF directly
-    relevant' — this is a conditional that forces a relevance
-    check first. The prescribed refusal text makes is_refusal flag
-    deterministic.
-
-  ──────────────────────────────────────────────────────────────────
-  Building GroundedAnswerSystem
-  ──────────────────────────────────────────────────────────────────
-  GroundedAnswerSystem ready | prompt=v2 | mode=mock generation
-
-  ──────────────────────────────────────────────────────────────────
-  Demo Answers  (6 questions)
-  ──────────────────────────────────────────────────────────────────
-
-  ── Q1: Direct — Ch9 (Force) ────────────────────────────────────
-  Question : What is Newton's second law of motion? Write the formula.
-  Expected : grounded answer
-  Top chunk: [Chapter 9: Force and Laws of Motion]  9.3 SECOND LAW OF MOTION  (score=0.03279)
-
-  Answer   :
-    Newton's Second Law of Motion states: The rate of change of momentum of an object is proportional to the applied unbalanced force in the direction of the force. Mathematically:
-      F = ma
-    where F = force (N), m = mass (kg), a = acceleration (m s⁻²).
-    1 Newton = 1 kg × 1 m s⁻².
-
-  Status   : → ANSWERED
-
-  ── Q2: Cross-chapter — Ch11 (Work & Energy) ────────────────────
-  Question : What is the difference between kinetic energy and potential energy?
-  Expected : grounded answer
-  Top chunk: [Chapter 11: Work and Energy]  11.2 ENERGY  (score=0.03279)
-
-  Answer   :
-    Kinetic Energy KE = ½ × m × v²
-    where m = mass (kg), v = velocity (m s⁻¹).
-    Unit: Joule (J).
-
-  Status   : → ANSWERED
-
-  ── Q3: Calculation — Ch9 conservation of momentum ──────────────
-  Question : A bullet of 20 g is fired from a 4 kg gun at 400 m/s. Find recoil velocity.
-  Expected : step-by-step calculation
-  Top chunk: [Chapter 9: Force and Laws of Motion]  9.5 CONSERVATION OF MOMENTUM  (score=0.03279)
-
-  Answer   :
-    By conservation of momentum: m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂
-    For gun (m=4 kg) + bullet (m=0.02 kg, v=400 m s⁻¹), both initially at rest:
-    0 = 0.02×400 + 4×v₂ → v₂ = -2 m s⁻¹
-    Gun recoils at 2 m s⁻¹ opposite to bullet direction.
-
-  Status   : → ANSWERED
-
-  ── Q4: Paraphrased — asking about 'acceleration' differently ───
-  Question : How do we measure the rate at which velocity changes over time?
-  Expected : grounded answer
-  Top chunk: [Chapter 8: Motion]  8.4 RATE OF CHANGE OF VELOCITY — ACCELERATION  (score=0.03279)
-
-  Answer   :
-    Based on the retrieved NCERT content:
-    If the velocity of an object changes, either the speed changes or the
-    (See retrieved context for full details.)
-
-  Status   : → ANSWERED
-
-  ── Q5: Out-of-scope — Biology, Ch1 ─────────────────────────────
-  Question : Explain the process of photosynthesis in plants.
-  Expected : REFUSAL
-  Top chunk: [Chapter 8: Motion]  8.3 MEASURING THE RATE OF MOTION  (score=0.03226)
-
-  Answer   :
-    This information is not in the provided chapters. Please refer to the relevant chapter.
-
-  Status   : ✓ REFUSAL
-
-  ── Q6: Adversarial OOS — Physics but Ch13 (not in corpus) ──────
-  Question : How does electric current flow through a copper wire?
-  Expected : REFUSAL
-  Top chunk: [Chapter 12: Sound]  12.3 CHARACTERISTICS OF SOUND  (score=0.03202)
-
-  Answer   :
-    This information is not in the provided chapters. Please refer to the relevant chapter.
-
-  Status   : ✓ REFUSAL
-  ✓ Stage 3 complete
+  Q1 (Direct — Ch9):      Newton's Second Law → ANSWERED ✓
+  Q2 (Cross-chapter):     KE vs PE            → ANSWERED ✓
+  Q3 (Calculation):       Bullet recoil       → ANSWERED ✓
+  Q4 (Paraphrased):       Rate of velocity    → ANSWERED ✓
+  Q5 (Out-of-scope):      Photosynthesis      → REFUSAL  ✓
+  Q6 (Adversarial OOS):   Electric current    → REFUSAL  ✓
 
 ──────────────────────────────────────────────────────────────────────
   STAGE 4  EVALUATION  (25 questions · 5 chapters)
 ──────────────────────────────────────────────────────────────────────
 
-  ▸ Importing evaluation module …
-
-  ──────────────────────────────────────────────────────────────────
-  Running 25 evaluation questions
-  ──────────────────────────────────────────────────────────────────
-
         Type           Result                 Ch     Question
   ────────────────────────────────────────────────────────────────────
-  ✗ Q01  direct         wrong                  Ch8    What are the three equations of uni
-  ✗ Q02  direct         wrong                  Ch8    What is the difference between unif
-  ✓ Q03  direct         correct                Ch8    An object travels 16 m in 4 s then 
-  ✓ Q04  paraphrased    correct                Ch8    How do you find the speed of an obj
-  ~ Q05  paraphrased    partial                Ch8    What happens to the velocity of an 
+  ✗ Q01  direct         wrong                  Ch8    What are the three equations of uni…
+  ✗ Q02  direct         wrong                  Ch8    What is the difference between unif…
+  ✓ Q03  direct         correct                Ch8    An object travels 16 m in 4 s then…
+  ✓ Q04  paraphrased    correct                Ch8    How do you find the speed of an obj…
+  ~ Q05  paraphrased    partial                Ch8    What happens to the velocity of an…
   ✓ Q06  direct         correct                Ch9    State Newton's second law of motion
-  ~ Q07  direct         partial                Ch9    A bullet of 20 g is fired from 4 kg
-  ✗ Q08  direct         wrong                  Ch9    Why does dust come out of a carpet 
-  ~ Q09  paraphrased    partial                Ch9    newton 2nd law force equal mass tim
-  ✗ Q10  paraphrased    incorrect_refusal      Ch9    If I push a truck but it doesn't mo
-  ✗ Q11  direct         wrong                  Ch10   State Newton's universal law of gra
+  ~ Q07  direct         partial                Ch9    A bullet of 20 g is fired from 4 kg…
+  ✗ Q08  direct         wrong                  Ch9    Why does dust come out of a carpet…
+  ~ Q09  paraphrased    partial                Ch9    newton 2nd law force equal mass tim…
+  ✗ Q10  paraphrased    incorrect_refusal      Ch9    If I push a truck but it doesn't mo…
+  ✗ Q11  direct         wrong                  Ch10   State Newton's universal law of gra…
   ✓ Q12  direct         correct                Ch10   What is acceleration due to gravity
-  ✓ Q13  direct         correct                Ch10   An object of mass 10 kg. What is it
-  ✗ Q14  paraphrased    wrong                  Ch10   Why is the weight of an object on M
-  ✗ Q15  direct         wrong                  Ch10   What is Archimedes principle and wh
-  ~ Q16  direct         partial                Ch11   Define kinetic energy and write its
-  ~ Q17  direct         partial                Ch11   A lamp consumes 1000 J in 10 s. Wha
-  ✗ Q18  direct         incorrect_refusal      Ch11   What is the commercial unit of ener
-  ✗ Q19  paraphrased    incorrect_refusal      Ch11   How much energy is stored in a ball
-  ✓ Q20  direct         correct                Ch12   What is the speed of sound in air, 
-  ✓ Q21  direct         correct                Ch12   What is an echo and what is the min
-  ✗ Q22  direct         wrong                  Ch12   A sonar gets echo in 4 s. Speed of 
-  ✗ Q23  paraphrased    incorrect_refusal      Ch12   What determines the pitch and loudn
-  ✓ Q24  out_of_scope   correct_refusal        OOS    Explain the process of photosynthes
-  ✓ Q25  out_of_scope   correct_refusal        OOS    How does electric current flow thro
-
-  Completed 25 questions in 0.1s
+  ✓ Q13  direct         correct                Ch10   An object of mass 10 kg. What is it…
+  ✗ Q14  paraphrased    wrong                  Ch10   Why is the weight of an object on M…
+  ✗ Q15  direct         wrong                  Ch10   What is Archimedes principle and wh…
+  ~ Q16  direct         partial                Ch11   Define kinetic energy and write its…
+  ~ Q17  direct         partial                Ch11   A lamp consumes 1000 J in 10 s. Wha…
+  ✗ Q18  direct         incorrect_refusal      Ch11   What is the commercial unit of ener…
+  ✗ Q19  paraphrased    incorrect_refusal      Ch11   How much energy is stored in a ball…
+  ✓ Q20  direct         correct                Ch12   What is the speed of sound in air…
+  ✓ Q21  direct         correct                Ch12   What is an echo and what is the min…
+  ✗ Q22  direct         wrong                  Ch12   A sonar gets echo in 4 s. Speed of…
+  ✗ Q23  paraphrased    incorrect_refusal      Ch12   What determines the pitch and loudn…
+  ✓ Q24  out_of_scope   correct_refusal        OOS    Explain the process of photosynthes…
+  ✓ Q25  out_of_scope   correct_refusal        OOS    How does electric current flow thro…
 
 ════════════════════════════════════════════════════════════════════
 EVALUATION SUMMARY
@@ -609,104 +470,13 @@ out_of_scope        2         2         0         0
 ──────────────────────────────────────────────────
 TOTAL              25         9         5        11
 
-Overall score: 9/25 = 36%
-
-Grounding (of 19 answered questions):
-  grounded      : 18
-  ungrounded    : 1
-
-Out-of-scope refusals: 2/2 correct | 0 missed
-
-── Failure Analysis (────────────────────────────────────────)
-
-  Q01: What are the three equations of uniformly accelerated m
-    Correctness : wrong
-    Top chunk   : 8.6 EQUATIONS OF MOTION FOR UNIFORM ACCE (score=0.033)
-    Root cause  : RETRIEVAL — top chunk section '8.6 EQUATIONS OF MOTION FOR UN'
-                  Check: is this the right section? If not → retrieval bug
-
-  Q02: What is the difference between uniform and non-uniform 
-    Correctness : wrong
-    Top chunk   : 8.3 MEASURING THE RATE OF MOTION (score=0.033)
-    Root cause  : RETRIEVAL — top chunk section '8.3 MEASURING THE RATE OF MOTI'
-                  Check: is this the right section? If not → retrieval bug
-
-  Q05: What happens to the velocity of an object moving in a c
-    Correctness : partial
-    Top chunk   : 8.4 RATE OF CHANGE OF VELOCITY — ACCELER (score=0.033)
-    Root cause  : RETRIEVAL — answer partially in top-1 chunk;
-                  full answer spread across 2+ chunks
-
-  Q07: A bullet of 20 g is fired from 4 kg gun at 400 m/s. Fin
-    Correctness : partial
-    Top chunk   : 9.5 CONSERVATION OF MOMENTUM (score=0.033)
-    Root cause  : RETRIEVAL — answer partially in top-1 chunk;
-                  full answer spread across 2+ chunks
-
-  ──────────────────────────────────────────────────────────────────
-  Retriever Comparison  (BM25 vs Semantic vs Hybrid)
-  ──────────────────────────────────────────────────────────────────
-  BM25: 36 chunks, avg 80 tokens/chunk
-  SentenceTransformer: 36 chunks × 3065 vocab dims
-  BM25: 36 chunks, avg 80 tokens/chunk
-  SentenceTransformer: 36 chunks × 3065 vocab dims
-  Hybrid retriever ready (36 chunks)
-
-────────────────────────────────────────────────────────────────────
-RETRIEVER COMPARISON  (Rank-1 section for 5 test queries)
-────────────────────────────────────────────────────────────────────
-Query                                          BM25   Semantic     Hybrid
-────────────────────────────────────────────────────────────────────
-What is Newton's second law?                      ✓          ✓          ✓
-What determines loudness of sound?                ✓          ✓          ✓
-Calculate kinetic energy of 15 kg at 4            ✓          ✓          ✓
-Why does an object float in water?                ✓          ✗          ✓
-What is acceleration due to gravity?              ✗          ✓          ✗
-────────────────────────────────────────────────────────────────────
-Correct rank-1                                    4          4          4 / 5
-
-  ──────────────────────────────────────────────────────────────────
-  Saving Results
-  ──────────────────────────────────────────────────────────────────
-
-✓ Results saved → C:\Users\shubh\Project\ncert_rag_STandBM25\eval/evaluation_results.csv
-✓ Markdown saved → C:\Users\shubh\Project\ncert_rag_STandBM25\eval/evaluation_results.md
-
-  ──────────────────────────────────────────────────────────────────
-  Failure Analysis  (16 non-correct results)
-  ──────────────────────────────────────────────────────────────────
-
-  Q01  [Ch8]  What are the three equations of uniformly accelerated m
-    Correctness : wrong
-    Top chunk   : 8.6 EQUATIONS OF MOTION FOR UNIFORM ACCE
-      Root cause: RETRIEVAL or CHUNKING — content either split
-      across chunk boundaries or section header not used as
-      chunk boundary. Fix: force commit on section_header.
-
-  Q02  [Ch8]  What is the difference between uniform and non-uniform 
-    Correctness : wrong
-    Top chunk   : 8.3 MEASURING THE RATE OF MOTION
-      Root cause: RETRIEVAL or CHUNKING — content either split
-      across chunk boundaries or section header not used as
-      chunk boundary. Fix: force commit on section_header.
-
-  Q05  [Ch8]  What happens to the velocity of an object moving in a c
-    Correctness : partial
-    Top chunk   : 8.4 RATE OF CHANGE OF VELOCITY — ACCELER
-      Root cause: RETRIEVAL or CHUNKING — content either split
-      across chunk boundaries or section header not used as
-      chunk boundary. Fix: force commit on section_header.
-
-  Q07  [Ch9]  A bullet of 20 g is fired from 4 kg gun at 400 m/s. Fin
-    Correctness : partial
-    Top chunk   : 9.5 CONSERVATION OF MOMENTUM
-      Root cause: RETRIEVAL or CHUNKING — content either split
-      across chunk boundaries or section header not used as
-      chunk boundary. Fix: force commit on section_header.
-
-  ═══ FINAL SCORE: 9/25 (36%) ═══
+Overall score         : 9/25 = 36%
+Grounded (of 19 ans.) : 18 grounded · 1 ungrounded
+Out-of-scope refusals : 2/2 correct · 0 missed
 
 ══════════════════════════════════════════════════════════════════════
 ║                         PIPELINE COMPLETE                          ║
 ══════════════════════════════════════════════════════════════════════
- 
+```
+
+</details>
