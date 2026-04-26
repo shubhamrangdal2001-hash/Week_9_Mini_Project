@@ -1,0 +1,290 @@
+[
+  {
+    "id": "chapter_8_motion_000",
+    "text": "Chapter 8: Motion\n\n8.1 DESCRIBING MOTION\n\nMotion is one of the most common phenomena we observe in everyday life.\nA car moving on a road, a bird flying in the sky, a ball rolling on the\nground \u2014 all these are examples of motion. In this chapter, we shall\ndescribe the motion of objects along a straight line.\n\nAn object is said to be in motion if it changes its position with time\nwith respect to some fixed reference point. If the position of an object\ndoes not change with time, the object is said to be at rest.\n8.2 UNIFORM MOTION AND NON-UNIFORM MOTION\n\nIf an object moves equal distances in equal intervals of time, the object\nis said to be in uniform motion. A car travelling on a straight highway at\na constant speed of 60 km/h covers equal distances in equal time intervals.\n\nIf an object does not cover equal distances in equal intervals of time, the\nmotion is said to be non-uniform motion. A ball rolling down a slope or a\ncar in heavy traffic shows non-uniform motion.\n\n8.3 MEASURING THE RATE OF MOTION\n\nThe distance travelled by an object in unit time is called its speed.\nSpeed = Distance / Time\nSI unit of speed is metre per second (m s-1 or ms-1).\n\nAverage speed = Total distance / Total time",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.3 MEASURING THE RATE OF MOTION",
+    "content_type": "concept",
+    "word_count": 226
+  },
+  {
+    "id": "chapter_8_motion_001",
+    "text": "EXAMPLE 8.1\nAn object travels 16 m in 4 s and then another 16 m in 2 s. What is the\naverage speed of the object?\n\nSolution:\nTotal distance = 16 + 16 = 32 m\nTotal time = 4 + 2 = 6 s\nAverage speed = 32 / 6 = 5.33 m s-1",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.3 MEASURING THE RATE OF MOTION",
+    "content_type": "example",
+    "word_count": 55
+  },
+  {
+    "id": "chapter_8_motion_002",
+    "text": "Solution: Total distance = 16 + 16 = 32 m Total time = 4 + 2 = 6 s Average speed = 32 / 6 = 5.33 m s-1\n\nTherefore the average speed of the object is 5.33 m s-1.\n\n8.3.1 Speed with Direction \u2014 Velocity\n\nVelocity is the speed of an object in a specified direction. It is a vector\nquantity. The SI unit of velocity is also m s-1.\n\nVelocity = Displacement / Time\n\nIf the velocity of an object changes, either the speed changes or the\ndirection changes. An object moving in a circular path at constant speed has\na changing velocity because the direction keeps changing.\n\n8.4 RATE OF CHANGE OF VELOCITY \u2014 ACCELERATION\n\nThe rate of change of velocity of an object with time is called acceleration.\nAcceleration = (Final velocity - Initial velocity) / Time\n             = (v - u) / t\n\nThe SI unit of acceleration is m s-2 (metre per second squared).\n\nWhen velocity increases with time, acceleration is positive.\nWhen velocity decreases with time, acceleration is negative (deceleration or retardation).\nIf velocity is constant, acceleration is zero (uniform motion).",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.4 RATE OF CHANGE OF VELOCITY \u2014 ACCELERATION",
+    "content_type": "concept",
+    "word_count": 187
+  },
+  {
+    "id": "chapter_8_motion_003",
+    "text": "EXAMPLE 8.2\nA car starts from rest and reaches a velocity of 20 m s-1 in 10 s.\nWhat is the acceleration of the car?\n\nSolution:\nu = 0 (starts from rest)\nv = 20 m s-1\nt = 10 s\na = (v - u) / t = (20 - 0) / 10 = 2 m s-2",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.4 RATE OF CHANGE OF VELOCITY \u2014 ACCELERATION",
+    "content_type": "example",
+    "word_count": 58
+  },
+  {
+    "id": "chapter_8_motion_004",
+    "text": "Solution: u = 0 (starts from rest) v = 20 m s-1 t = 10 s a = (v - u) / t = (20 - 0) / 10 = 2 m s-2\n\nTherefore the acceleration of the car is 2 m s-2.\n\n8.5 GRAPHICAL REPRESENTATION OF MOTION\n\n8.5.1 Distance-Time Graph\n\nA distance-time graph shows how distance changes with time.\n[FIGURE 8.1: Distance-time graph for uniform motion \u2014 a straight line]\n\nThe slope of the distance-time graph gives the speed of the object.\nFor uniform motion the graph is a straight line. A steeper slope means\ngreater speed.\n\n8.5.2 Velocity-Time Graph\n\nA velocity-time graph shows how velocity changes with time.\n[FIGURE 8.2: Velocity-time graph showing uniform acceleration]\n\nThe slope of the velocity-time graph gives the acceleration.\nThe area under the velocity-time graph gives the displacement.\n\n8.6 EQUATIONS OF MOTION FOR UNIFORM ACCELERATION\n\nWhen an object moves along a straight line with uniform acceleration, its\nmotion can be described by three equations (equations of motion):\n\n1. v = u + at\n2. s = ut + (1/2) at2\n3. v2 = u2 + 2as\n\nwhere:\n  u = initial velocity (m s-1)\n  v = final velocity (m s-1)\n  a = acceleration (m s-2)\n  t = time (s)\n  s = displacement (m)",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.6 EQUATIONS OF MOTION FOR UNIFORM ACCELERATION",
+    "content_type": "concept",
+    "word_count": 209
+  },
+  {
+    "id": "chapter_8_motion_005",
+    "text": "EXAMPLE 8.3\nA ball is thrown vertically upward with an initial velocity of 19.6 m s-1.\nFind the maximum height reached.\n\nSolution:\nAt maximum height, final velocity v = 0\nu = 19.6 m s-1, a = -9.8 m s-2 (gravity acts downward)\nUsing v2 = u2 + 2as:\n0 = (19.6)2 + 2 \u00d7 (-9.8) \u00d7 s\n19.6 s = (19.6)2 / (2 \u00d7 9.8) = 384.16 / 19.6 = 19.6 m",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.6 EQUATIONS OF MOTION FOR UNIFORM ACCELERATION",
+    "content_type": "example",
+    "word_count": 73
+  },
+  {
+    "id": "chapter_8_motion_006",
+    "text": "maximum height, final velocity v = 0 u = 19.6 m s-1, a = -9.8 m s-2 (gravity acts downward) Using v2 = u2 + 2as: 0 = (19.6)2 + 2 \u00d7 (-9.8) \u00d7 s 19.6 s = (19.6)2 / (2 \u00d7 9.8) = 384.16 / 19.6 = 19.6 m\n\nTherefore the maximum height reached is 19.6 m.\n\n8.7 UNIFORM CIRCULAR MOTION\n\nWhen an object moves in a circular path at constant speed, it is said to\nbe in uniform circular motion. Although the speed is constant, the velocity\ncontinuously changes direction. Hence uniform circular motion is an\naccelerated motion.\n\nThe acceleration in uniform circular motion is directed toward the centre\nof the circle and is called centripetal acceleration.\n\n1. An athlete completes one round of a circular track of diameter 200 m in\n   40 s. What will be the distance covered and the displacement at the end\n   of 2 minutes 20 s?\n\n2. Joseph jogs from one end A to the other end B of a straight 300 m road\n   in 2 minutes 30 s and then turns around and jogs 100 m back to point C\n   in another 1 minute. Find average speed and average velocity.\n\n3. Abdul while driving to school, computes the average speed for his trip\n   to be 20 km/h. On his return trip along the same route, there is less\n   traffic and the average speed is 30 km/h. What is the average speed for\n   Abdul's trip?",
+    "chapter": "Chapter 8: Motion",
+    "section": "8.7 UNIFORM CIRCULAR MOTION",
+    "content_type": "concept",
+    "word_count": 242
+  },
+  {
+    "id": "chapter_9_force_and_laws_of_motion_000",
+    "text": "Chapter 9: Force and Laws of Motion\n\n9.1 BALANCED AND UNBALANCED FORCES\n\nA force is a push or pull on an object. Forces can change the state of\nmotion of an object \u2014 they can make a stationary object move, a moving\nobject stop, change the speed or direction of a moving object, or change\nthe shape of an object.\n\nWhen two forces act on an object in opposite directions and are equal in\nmagnitude, the net force is zero. These are called balanced forces.\nBalanced forces cannot change the state of rest or motion of an object.\n\nWhen the net force on an object is not zero, the forces are unbalanced.\nAn unbalanced force changes the state of motion of an object.\n\n9.2 FIRST LAW OF MOTION \u2014 LAW OF INERTIA\n\nNewton's First Law of Motion: An object remains in a state of rest, or\nin a state of uniform motion in a straight line, unless compelled to change\nthat state by an applied force.\n\nThis tendency of objects to resist change in their state of motion is\ncalled inertia. Mass is a measure of inertia \u2014 a more massive object\nhas greater inertia and requires a larger force to change its state of motion.\n\nExamples of inertia:\n\u2022 When a bus suddenly stops, passengers tend to lurch forward because\n  their bodies tend to continue in the state of motion.\n\u2022 Dust comes out of a carpet when it is beaten because the carpet moves\n  but the dust particles tend to remain at rest due to inertia.\n\u2022 A coin placed on a card over a glass falls into the glass when the card\n  is flicked quickly because the coin remains at rest while the card moves.\n\n9.3 SECOND LAW OF MOTION",
+    "chapter": "Chapter 9: Force and Laws of Motion",
+    "section": "9.3 SECOND LAW OF MOTION",
+    "content_type": "concept",
+    "word_count": 293
+  },
+  {
+    "id": "chapter_9_force_and_laws_of_motion_001",
+    "text": "9.3 SECOND LAW OF MOTION\n\nThe momentum of an object is the product of its mass and velocity:\n  p = m \u00d7 v\n\nThe SI unit of momentum is kg m s-1.\n\nNewton's Second Law of Motion: The rate of change of momentum of an object\nis proportional to the applied unbalanced force in the direction of the force.\n\nMathematically:\n  F = ma\n\nwhere F = applied force (N or kg m s-2)\n      m = mass of the object (kg)\n      a = acceleration (m s-2)\n\nOne Newton is defined as the force that produces an acceleration of 1 m s-2\nin an object of mass 1 kg. So 1 N = 1 kg m s-2.",
+    "chapter": "Chapter 9: Force and Laws of Motion",
+    "section": "9.3 SECOND LAW OF MOTION",
+    "content_type": "concept",
+    "word_count": 115
+  },
+  {
+    "id": "chapter_9_force_and_laws_of_motion_002",
+    "text": "EXAMPLE 9.1\nA cricket ball of mass 0.15 kg is moving with a velocity of 12 m s-1.\nA batsman hits it back in the opposite direction with a velocity of 20 m s-1.\nIf the bat is in contact for 0.01 s, find the force applied.\n\nSolution:\nChange in momentum = m(v - u) = 0.15 \u00d7 (20 - (-12)) = 0.15 \u00d7 32 = 4.8 kg m s-1\nForce = Change in momentum / Time = 4.8 / 0.01 = 480 N",
+    "chapter": "Chapter 9: Force and Laws of Motion",
+    "section": "9.3 SECOND LAW OF MOTION",
+    "content_type": "example",
+    "word_count": 84
+  },
+  {
+    "id": "chapter_9_force_and_laws_of_motion_003",
+    "text": "Solution: Change in momentum = m(v - u) = 0.15 \u00d7 (20 - (-12)) = 0.15 \u00d7 32 = 4.8 kg m s-1 Force = Change in momentum / Time = 4.8 / 0.01 = 480 N\n\nTherefore the force applied by the batsman is 480 N.\n\n9.4 THIRD LAW OF MOTION\n\nNewton's Third Law of Motion: For every action there is an equal and opposite\nreaction; the forces always act on two different objects.\n\nWhen you push a wall with force F, the wall pushes back on you with the same\nforce F in the opposite direction. The action and reaction forces are equal\nin magnitude but opposite in direction, and they always act on different objects.\n\nExamples of Newton's Third Law:\n\u2022 A gun recoils when a bullet is fired. The bullet exerts an equal and\n  opposite force on the gun.\n\u2022 A rocket moves forward by expelling gases backward.\n\u2022 Swimming: a swimmer pushes the water backward, the water pushes the\n  swimmer forward.\n\n9.5 CONSERVATION OF MOMENTUM\n\nThe total momentum of a system of objects is conserved (remains constant)\nif no external unbalanced force acts on the system.\n\nFor a two-body system:\n  m1 u1 + m2 u2 = m1 v1 + m2 v2",
+    "chapter": "Chapter 9: Force and Laws of Motion",
+    "section": "9.5 CONSERVATION OF MOMENTUM",
+    "content_type": "concept",
+    "word_count": 206
+  },
+  {
+    "id": "chapter_9_force_and_laws_of_motion_004",
+    "text": "EXAMPLE 9.2\nA bullet of mass 20 g (0.020 kg) is fired from a gun of mass 4 kg at a\nvelocity of 400 m s-1. Find the recoil velocity of the gun.\n\nSolution:\nBefore firing: total momentum = 0 (both at rest)\nAfter firing: 0.020 \u00d7 400 + 4 \u00d7 v_gun = 0\n8 + 4 \u00d7 v_gun = 0\nv_gun = -8 / 4 = -2 m s-1",
+    "chapter": "Chapter 9: Force and Laws of Motion",
+    "section": "9.5 CONSERVATION OF MOMENTUM",
+    "content_type": "example",
+    "word_count": 70
+  },
+  {
+    "id": "chapter_9_force_and_laws_of_motion_005",
+    "text": "Solution: Before firing: total momentum = 0 (both at rest) After firing: 0.020 \u00d7 400 + 4 \u00d7 v_gun = 0 8 + 4 \u00d7 v_gun = 0 v_gun = -8 / 4 = -2 m s-1\n\nTherefore the gun recoils at 2 m s-1 in the direction opposite to the bullet.\n\n1. An object of mass 100 g is moving with a velocity of 10 m s-1. A force\n   of 1 N acts on it for 5 s in the direction of motion. Find the final\n   momentum.\n\n2. Using a horizontal force of 200 N, we intend to move a wooden cabinet\n   across a floor at a constant velocity. What is the friction force that\n   will be exerted on the cabinet?\n\n3. Two objects each of mass 1.5 kg are moving in the same direction with\n   speeds 2 m s-1 and 3 m s-1 respectively. They collide and stick together.\n   Find the final velocity.",
+    "chapter": "Chapter 9: Force and Laws of Motion",
+    "section": "9.5 CONSERVATION OF MOMENTUM",
+    "content_type": "concept",
+    "word_count": 155
+  },
+  {
+    "id": "chapter_10_gravitation_000",
+    "text": "Chapter 10: Gravitation\n\n10.1 GRAVITATION\n\nEvery object in the universe attracts every other object with a force which\nis called the gravitational force. This was first recognised by Sir Isaac Newton.\n\n10.1.1 Universal Law of Gravitation\n\nNewton's Universal Law of Gravitation: Every object in the universe attracts\nevery other object with a force that is directly proportional to the product\nof their masses and inversely proportional to the square of the distance\nbetween them.\n\nMathematically:\n  F = G \u00d7 m1 \u00d7 m2 / d2\n\nwhere:\n  F  = gravitational force (N)\n  m1 = mass of first object (kg)\n  m2 = mass of second object (kg)\n  d  = distance between the centres of the two objects (m)\n  G  = Universal Gravitational Constant = 6.673 \u00d7 10-11 N m2 kg-2\n\n[FIGURE 10.1: Gravitational force between two masses m1 and m2 at distance d]\n\nThe value G = 6.673 \u00d7 10-11 N m2 kg-2 was determined experimentally by\nHenry Cavendish in 1798.\n\n10.2 FREE FALL\n\nWhen an object falls under the influence of gravity alone (without air\nresistance), it is called free fall. During free fall, the only force\nacting on the object is gravity.\n\nThe acceleration produced during free fall is called the acceleration due\nto gravity, denoted by g.\n\ng = GM / R2\n\nwhere M = mass of the Earth = 6 \u00d7 1024 kg\n      R = radius of the Earth = 6.4 \u00d7 106 m\n      G = 6.673 \u00d7 10-11 N m2 kg-2\n\nSubstituting: g = 9.8 m s-2 (approximately 10 m s-2)\n\ng is taken as positive when an object falls toward the Earth.\ng is taken as negative when an object is thrown upward.",
+    "chapter": "Chapter 10: Gravitation",
+    "section": "10.2 FREE FALL",
+    "content_type": "concept",
+    "word_count": 276
+  },
+  {
+    "id": "chapter_10_gravitation_001",
+    "text": "EXAMPLE 10.1\nAn object of mass 2 kg is dropped from a height. How far does it fall in 3 s?\n\nSolution:\nu = 0 (dropped from rest), a = g = 9.8 m s-2, t = 3 s\ns = ut + (1/2)gt2 = 0 + (1/2) \u00d7 9.8 \u00d7 9 = 44.1 m",
+    "chapter": "Chapter 10: Gravitation",
+    "section": "10.2 FREE FALL",
+    "content_type": "example",
+    "word_count": 55
+  },
+  {
+    "id": "chapter_10_gravitation_002",
+    "text": "Solution: u = 0 (dropped from rest), a = g = 9.8 m s-2, t = 3 s s = ut + (1/2)gt2 = 0 + (1/2) \u00d7 9.8 \u00d7 9 = 44.1 m\n\nTherefore the object falls 44.1 m in 3 s.\n\n10.3 MASS AND WEIGHT\n\nMass is the amount of matter contained in an object. It is a scalar quantity\nmeasured in kilograms (kg). The mass of an object remains constant everywhere\nin the universe.\n\nWeight is the force with which an object is attracted toward the Earth.\n  W = m \u00d7 g\n\nWeight is a vector quantity whose SI unit is Newton (N).\nSince g varies from place to place, weight varies. At the poles, g is slightly\ngreater than at the equator.\n\n10.3.1 Weight on the Moon\n\nThe mass of the Moon is about 1/100 of Earth's mass, and its radius is about\n1/4 of Earth's radius. The acceleration due to gravity on the Moon is:\n  g_Moon = g_Earth / 6 = 9.8 / 6 \u2248 1.63 m s-2\n\nTherefore an object weighs 1/6 of its Earth weight on the Moon.",
+    "chapter": "Chapter 10: Gravitation",
+    "section": "10.3 MASS AND WEIGHT",
+    "content_type": "concept",
+    "word_count": 185
+  },
+  {
+    "id": "chapter_10_gravitation_003",
+    "text": "EXAMPLE 10.2\nAn object has a mass of 10 kg on Earth. What is its weight on the Moon?\n(g_moon = 1.63 m s-2)\n\nSolution:\nWeight on Earth = m \u00d7 g = 10 \u00d7 9.8 = 98 N\nWeight on Moon  = m \u00d7 g_moon = 10 \u00d7 1.63 = 16.3 N",
+    "chapter": "Chapter 10: Gravitation",
+    "section": "10.3 MASS AND WEIGHT",
+    "content_type": "example",
+    "word_count": 53
+  },
+  {
+    "id": "chapter_10_gravitation_004",
+    "text": "Solution: Weight on Earth = m \u00d7 g = 10 \u00d7 9.8 = 98 N Weight on Moon = m \u00d7 g_moon = 10 \u00d7 1.63 = 16.3 N\n\nTherefore the weight of the object on the Moon is 16.3 N.\n\n10.4 THRUST AND PRESSURE\n\nThrust is the force acting on an object perpendicular to its surface.\nPressure is defined as thrust per unit area.\n\nPressure = Force / Area = F / A\n\nSI unit of pressure is Pascal (Pa).\n1 Pa = 1 N m-2\n\nPressure increases with depth in a fluid:\n  P = h\u03c1g\n\nwhere h = depth below the surface (m)\n      \u03c1 = density of the fluid (kg m-3)\n      g = acceleration due to gravity (m s-2)\n\n10.5 BUOYANCY AND ARCHIMEDES' PRINCIPLE\n\nWhen an object is placed in a fluid, it experiences an upward force called\nbuoyant force or upthrust. This is because fluid pressure increases with\ndepth, so the pressure on the bottom of the object is greater than the\npressure on its top.\n\nArchimedes' Principle: When an object is immersed in a fluid, the buoyant\nforce acting on it is equal to the weight of the fluid displaced by the object.\n\nBuoyant force = Weight of fluid displaced = V \u00d7 \u03c1_fluid \u00d7 g\n\nAn object floats if its average density is less than the density of the fluid.\nAn object sinks if its average density is greater than the density of the fluid.\n\nThis explains why:\n\u2022 A ship made of steel floats \u2014 it is hollow and its average density is\n  less than water.\n\u2022 A stone sinks \u2014 its density is greater than water.\n\n[FIGURE 10.2: Buoyant force on an object immersed in a fluid]",
+    "chapter": "Chapter 10: Gravitation",
+    "section": "10.5 BUOYANCY AND ARCHIMEDES' PRINCIPLE",
+    "content_type": "exercise",
+    "word_count": 284
+  },
+  {
+    "id": "chapter_10_gravitation_005",
+    "text": "[FIGURE 10.2: Buoyant force on an object immersed in a fluid]\n\n1. How does the force of gravitation between two objects change when the\n   distance between them is reduced to half?\n\n2. A stone is dropped from the edge of a roof. It passes a window 5 m below\n   the roof 0.5 s after being dropped. How long does it take to fall another\n   5 m to reach the ground?\n\n3. Calculate the weight of a body of mass 5 kg on the surface of the Moon.",
+    "chapter": "Chapter 10: Gravitation",
+    "section": "10.5 BUOYANCY AND ARCHIMEDES' PRINCIPLE",
+    "content_type": "concept",
+    "word_count": 87
+  },
+  {
+    "id": "chapter_11_work_and_energy_000",
+    "text": "Chapter 11: Work and Energy\n\nWork is said to be done when a force acts on an object and causes it to\nmove in the direction of the force.\n\nWork = Force \u00d7 Displacement\n     = F \u00d7 s \u00d7 cos(\u03b8)\n\nwhere \u03b8 is the angle between the force and displacement.\n\nWhen \u03b8 = 0\u00b0 (force and displacement in same direction):  W = F \u00d7 s\nWhen \u03b8 = 90\u00b0 (force perpendicular to displacement):      W = 0\nWhen \u03b8 = 180\u00b0 (force opposite to displacement):          W = -F \u00d7 s\n\nThe SI unit of work is Joule (J). 1 J = 1 N \u00d7 1 m = 1 N m.\n\nWork is a scalar quantity.",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "Introduction",
+    "content_type": "concept",
+    "word_count": 114
+  },
+  {
+    "id": "chapter_11_work_and_energy_001",
+    "text": "EXAMPLE 11.1\nA force of 5 N acts on an object which moves a distance of 2 m in the\ndirection of the force. Find the work done.\n\nSolution:\nW = F \u00d7 s = 5 \u00d7 2 = 10 J",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "Introduction",
+    "content_type": "example",
+    "word_count": 41
+  },
+  {
+    "id": "chapter_11_work_and_energy_002",
+    "text": "Solution: W = F \u00d7 s = 5 \u00d7 2 = 10 J\n\nTherefore the work done is 10 J.\n\n11.2 ENERGY\n\nEnergy is the capacity to do work. An object that has energy can exert a\nforce on another object and do work on it.\n\nThe SI unit of energy is Joule (J), the same as work.\n\n11.2.1 Kinetic Energy\n\nThe energy possessed by an object due to its motion is called kinetic energy.\n\nKinetic Energy KE = (1/2) \u00d7 m \u00d7 v2\n\nwhere m = mass of the object (kg)\n      v = velocity of the object (m s-1)",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.2 ENERGY",
+    "content_type": "concept",
+    "word_count": 100
+  },
+  {
+    "id": "chapter_11_work_and_energy_003",
+    "text": "EXAMPLE 11.2\nFind the kinetic energy of an object of mass 15 kg moving with a velocity\nof 4 m s-1.\n\nSolution:\nKE = (1/2) \u00d7 m \u00d7 v2 = (1/2) \u00d7 15 \u00d7 42 = (1/2) \u00d7 15 \u00d7 16 = 120 J",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.2 ENERGY",
+    "content_type": "example",
+    "word_count": 44
+  },
+  {
+    "id": "chapter_11_work_and_energy_004",
+    "text": "Solution: KE = (1/2) \u00d7 m \u00d7 v2 = (1/2) \u00d7 15 \u00d7 42 = (1/2) \u00d7 15 \u00d7 16 = 120 J\n\nTherefore the kinetic energy of the object is 120 J.\n\n11.2.2 Potential Energy\n\nThe energy possessed by an object by virtue of its position or configuration\nis called potential energy.\n\nGravitational Potential Energy:\n  PE = m \u00d7 g \u00d7 h\n\nwhere m = mass (kg), g = 9.8 m s-2, h = height above the reference level (m)",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.2 ENERGY",
+    "content_type": "concept",
+    "word_count": 81
+  },
+  {
+    "id": "chapter_11_work_and_energy_005",
+    "text": "EXAMPLE 11.3\nA ball of mass 2 kg is at a height of 5 m above the ground. Find its potential\nenergy. (g = 10 m s-2)\n\nSolution:\nPE = mgh = 2 \u00d7 10 \u00d7 5 = 100 J",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.2 ENERGY",
+    "content_type": "example",
+    "word_count": 40
+  },
+  {
+    "id": "chapter_11_work_and_energy_006",
+    "text": "Solution: PE = mgh = 2 \u00d7 10 \u00d7 5 = 100 J\n\nTherefore the potential energy of the ball is 100 J.\n\n11.3 LAW OF CONSERVATION OF ENERGY\n\nEnergy can neither be created nor destroyed; it can only be converted from\none form to another. The total energy of an isolated system remains constant.\n\nDuring the free fall of an object:\n  At the top:       PE = maximum, KE = 0\n  While falling:    PE decreases, KE increases\n  At the bottom:    PE = 0, KE = maximum\n  At every point:   PE + KE = constant\n\nThis is the Law of Conservation of Mechanical Energy.",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.3 LAW OF CONSERVATION OF ENERGY",
+    "content_type": "concept",
+    "word_count": 103
+  },
+  {
+    "id": "chapter_11_work_and_energy_007",
+    "text": "EXAMPLE 11.4\nAn object of mass 1 kg is dropped from a height of 10 m. Find its kinetic\nenergy when it has fallen 5 m. (g = 10 m s-2)\n\nSolution:\nInitial PE at height 10 m = mgh = 1 \u00d7 10 \u00d7 10 = 100 J; KE = 0\nAfter falling 5 m: height above ground = 5 m\nPE = mgh = 1 \u00d7 10 \u00d7 5 = 50 J\nBy conservation: KE = Total energy - PE = 100 - 50 = 50 J",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.3 LAW OF CONSERVATION OF ENERGY",
+    "content_type": "example",
+    "word_count": 89
+  },
+  {
+    "id": "chapter_11_work_and_energy_008",
+    "text": "mgh = 1 \u00d7 10 \u00d7 10 = 100 J; KE = 0 After falling 5 m: height above ground = 5 m PE = mgh = 1 \u00d7 10 \u00d7 5 = 50 J By conservation: KE = Total energy - PE = 100 - 50 = 50 J\n\nTherefore the kinetic energy after falling 5 m is 50 J.\n\n11.4 POWER\n\nPower is the rate of doing work, i.e., work done per unit time.\n\nPower = Work done / Time = W / t\n\nThe SI unit of power is Watt (W). 1 W = 1 J s-1.\n\n1 kilowatt (kW) = 1000 W\n1 horsepower (hp) = 746 W",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.4 POWER",
+    "content_type": "concept",
+    "word_count": 112
+  },
+  {
+    "id": "chapter_11_work_and_energy_009",
+    "text": "EXAMPLE 11.5\nA lamp consumes 1000 J of electrical energy in 10 s. Find its power.\n\nSolution:\nP = W / t = 1000 / 10 = 100 W",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.4 POWER",
+    "content_type": "example",
+    "word_count": 29
+  },
+  {
+    "id": "chapter_11_work_and_energy_010",
+    "text": "Solution: P = W / t = 1000 / 10 = 100 W\n\nTherefore the power of the lamp is 100 W.\n\n11.4.1 Commercial Unit of Energy\n\nThe commercial unit of energy is kilowatt-hour (kWh).\n\n1 kWh = 1 kW \u00d7 1 hour = 1000 W \u00d7 3600 s = 3.6 \u00d7 106 J\n\n1 kWh is also called 1 unit of electrical energy.\n\n1. A body of mass 4 kg is moving with a velocity of 3 m s-1. Find its kinetic\n   energy.\n\n2. A man does 4 kJ of work in 50 s. Find his power.\n\n3. Find the energy in kWh consumed in 10 hours by four devices of power 500 W each.\n\n4. An object of mass 40 kg is raised to a height of 5 m above the ground.\n   What is its potential energy? (g = 10 m s-2)",
+    "chapter": "Chapter 11: Work and Energy",
+    "section": "11.4 POWER",
+    "content_type": "concept",
+    "word_count": 144
+  },
+  {
+    "id": "chapter_12_sound_000",
+    "text": "Chapter 12: Sound\n\n12.1 PRODUCTION OF SOUND\n\nSound is produced by vibration. When an object vibrates, it causes the\nsurrounding medium (air, water, solid) to vibrate as well, and these\nvibrations travel as sound waves.\n\nExamples of sound production:\n\u2022 A tuning fork vibrates when struck, producing sound.\n\u2022 Guitar strings vibrate when plucked.\n\u2022 Vocal cords vibrate when we speak.\n\nSound requires a medium to travel. It cannot travel through vacuum.\nThis is why there is no sound in outer space.\n\n12.2 PROPAGATION OF SOUND\n\nSound travels in the form of longitudinal waves \u2014 the particles of the\nmedium vibrate in the direction of propagation of the wave.\n\nWhen sound travels through air:\n\u2022 Compressions: regions where air particles are pushed together (high pressure)\n\u2022 Rarefactions: regions where air particles are spread apart (low pressure)\n\n[FIGURE 12.1: Compressions and rarefactions in a longitudinal wave]\n\n12.3 CHARACTERISTICS OF SOUND\n\n12.3.1 Frequency and Pitch\n\nFrequency (f): the number of complete vibrations (cycles) per second.\nSI unit: Hertz (Hz). 1 Hz = 1 vibration per second.\n\nPitch: the property of sound that depends on its frequency.\nA high-frequency sound has a high pitch (shrill). A low-frequency sound\nhas a low pitch (deep).\n\nThe human ear can hear sound in the frequency range 20 Hz to 20 000 Hz\n(20 kHz). This is called the audible range.\n\nInfrasound: frequency below 20 Hz (cannot be heard by humans)\nUltrasound: frequency above 20 000 Hz (20 kHz) (cannot be heard by humans)\n\n12.3.2 Amplitude and Loudness\n\nAmplitude: the maximum displacement of the vibrating particle from its\nmean (equilibrium) position.\n\nLoudness: the property of sound related to its amplitude.\nA large-amplitude sound is loud. A small-amplitude sound is soft.\n\nThe loudness of sound is measured in decibels (dB).\n\n12.3.3 Speed of Sound",
+    "chapter": "Chapter 12: Sound",
+    "section": "12.3 CHARACTERISTICS OF SOUND",
+    "content_type": "concept",
+    "word_count": 296
+  },
+  {
+    "id": "chapter_12_sound_001",
+    "text": "12.3.3 Speed of Sound\n\nThe speed of sound depends on the medium:\n  Speed in air at 25\u00b0C  \u2248 346 m s-1\n  Speed in water        \u2248 1500 m s-1\n  Speed in steel        \u2248 5100 m s-1\n\nSound travels faster in solids than in liquids, and faster in liquids than in gases.\nSound also travels faster at higher temperatures.\n\nwhere v = speed of sound (m s-1)\n      f = frequency (Hz)\n      \u03bb = wavelength (m)\n\n12.4 REFLECTION OF SOUND \u2014 ECHO\n\nSound, like light, gets reflected when it hits a hard surface. The reflected\nsound is called an echo.\n\nFor an echo to be heard distinctly, the minimum distance between the source\nand the reflecting surface must be 17.2 m (approximately 17 m). This is\nbecause the human ear can distinguish two sounds that are at least 0.1 s apart,\nand sound must travel 2 \u00d7 17.2 = 34.4 m in 0.1 s.\n\nFormula to find distance using echo:\n  d = v \u00d7 t / 2\n\nwhere d = distance to the reflecting surface (m)\n      v = speed of sound (m s-1)\n      t = time for echo to return (s)",
+    "chapter": "Chapter 12: Sound",
+    "section": "12.4 REFLECTION OF SOUND \u2014 ECHO",
+    "content_type": "concept",
+    "word_count": 188
+  },
+  {
+    "id": "chapter_12_sound_002",
+    "text": "EXAMPLE 12.1\nA person stands 85 m from a wall and shouts. He hears the echo after some\ntime. What is the time gap? (Speed of sound = 340 m s-1)\n\nSolution:\nTotal distance = 2 \u00d7 85 = 170 m\nTime = Distance / Speed = 170 / 340 = 0.5 s",
+    "chapter": "Chapter 12: Sound",
+    "section": "12.4 REFLECTION OF SOUND \u2014 ECHO",
+    "content_type": "example",
+    "word_count": 53
+  },
+  {
+    "id": "chapter_12_sound_003",
+    "text": "Solution: Total distance = 2 \u00d7 85 = 170 m Time = Distance / Speed = 170 / 340 = 0.5 s\n\nTherefore the echo is heard 0.5 s after the shout.\n\n12.5 USES OF MULTIPLE REFLECTIONS OF SOUND\n\nReverberation: The persistence of sound in a large hall due to repeated\nreflections from the walls, ceiling and floor. Excessive reverberation makes\nspeech difficult to understand. Concert halls use sound-absorbing materials\non walls to reduce reverberation.\n\nStethoscope: Multiple reflections of sound inside a tube allow doctors\nto listen to the sounds of the heart and lungs.\n\nMegaphone/horn/loudspeaker: Shape is designed to direct sound by reflection.\n\n12.6 ULTRASOUND\n\nUltrasound has frequencies above 20 000 Hz (20 kHz). It has many applications:\n\n1. Medical imaging (ultrasonography): Ultrasound pulses are sent into the body\n   and the reflected echoes are used to form images of internal organs.\n   It is safe \u2014 no radiation hazard.\n\n2. SONAR (Sound Navigation And Ranging): Uses ultrasound to find depth of\n   the ocean or detect underwater objects (submarines, fish shoals, icebergs).\n\n3. Detecting cracks in metal objects: Ultrasound passes through metal; cracks\n   cause partial reflection that can be detected.\n\n4. Cleaning of parts in hard-to-reach places: Objects are placed in a liquid\n   and ultrasound waves cause dirt to vibrate off.\n\n5. Echolocation: Bats and dolphins use ultrasound to navigate and hunt.\n\n12.6.1 SONAR Calculations\n\nSONAR sends ultrasound pulses downward and measures the time for the echo\nto return. Distance is calculated as:\n  d = v \u00d7 t / 2",
+    "chapter": "Chapter 12: Sound",
+    "section": "12.6 ULTRASOUND",
+    "content_type": "concept",
+    "word_count": 249
+  },
+  {
+    "id": "chapter_12_sound_004",
+    "text": "EXAMPLE 12.2\nA SONAR device on a submarine sends ultrasound pulses and receives the echo\nin 4 s. Speed of sound in seawater = 1500 m s-1. Find the depth of the ocean.\n\nSolution:\nd = v \u00d7 t / 2 = 1500 \u00d7 4 / 2 = 3000 m",
+    "chapter": "Chapter 12: Sound",
+    "section": "12.6 ULTRASOUND",
+    "content_type": "example",
+    "word_count": 50
+  },
+  {
+    "id": "chapter_12_sound_005",
+    "text": "Solution: d = v \u00d7 t / 2 = 1500 \u00d7 4 / 2 = 3000 m\n\nTherefore the depth of the ocean floor is 3000 m.\n\n12.7 STRUCTURE OF THE HUMAN EAR\n\nThe outer ear (pinna) collects sound waves and directs them into the ear canal\ntoward the eardrum (tympanic membrane). The eardrum vibrates with the sound.\nThese vibrations are transmitted by three tiny bones (ossicles: malleus, incus,\nstapes) to the inner ear (cochlea). The cochlea converts vibrations to\nelectrical nerve signals sent to the brain.\n\n1. A man is standing at a distance of 680 m from a cliff. He shouts and hears\n   the echo after 4 s. Find the speed of sound.\n\n2. What is the frequency range of audible sounds in humans?\n\n3. An echo is heard 0.6 s after a sound is produced. If speed of sound is\n   340 m s-1, how far is the reflecting surface?\n\n4. Why is the speed of sound greater in solids than in gases?\n\n5. Calculate the wavelength of sound in air if its frequency is 220 Hz and\n   speed is 346 m s-1.",
+    "chapter": "Chapter 12: Sound",
+    "section": "12.7 STRUCTURE OF THE HUMAN EAR",
+    "content_type": "concept",
+    "word_count": 185
+  }
+]
