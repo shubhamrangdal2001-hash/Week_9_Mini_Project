@@ -76,16 +76,37 @@ Source: https://ncert.nic.in/textbook.php?iesc1=0-11 (PDFs **not** committed).
 ## Architecture
 
 ```mermaid
+%%{init: {'flowchart': {'layout': 'elk'}}}%%
 flowchart TD
-    A[Student query] --> B[HybridRetriever]
+    A[Student Query] --> B[Hybrid Retriever]
     B --> C[BM25]
     B --> D[SentenceTransformer]
-    C & D --> E[Reciprocal Rank Fusion]
-    E --> F[GroundedAnswerSystem]
-    F --> G[LLM Gemini 1.5 Flash]
+    
+    D --> V[Vector Database]
+    V --> D
+    
+    C --> E[Reciprocal Rank Fusion]
+    D --> E
+    
+    E --> F[Grounded Answer System]
+    F --> G[Gemini 1.5 Flash]
     G --> H[Answer or Refusal]
 
----
+    classDef input stroke:#818cf8,fill:#eef2ff,color:#1e1b4b
+    classDef process stroke:#2dd4bf,fill:#f0fdfa,color:#1e1b4b
+    classDef storage stroke:#facc15,fill:#fefce8,color:#1e1b4b
+    classDef fusion stroke:#a78bfa,fill:#f5f3ff,color:#1e1b4b
+    classDef llm stroke:#fb923c,fill:#fff7ed,color:#1e1b4b
+    classDef output stroke:#4ade80,fill:#f0fdf4,color:#1e1b4b
+
+    class A input
+    class B,C,D process
+    class V storage
+    class E,F fusion
+    class G llm
+    class H output
+```
+
 
 ## Why Two Retrievers?
 
