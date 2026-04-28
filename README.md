@@ -8,6 +8,31 @@
 
 A Retrieval‑Augmented Generation (RAG) system built for **PariShiksha**, an ed‑tech startup targeting Class 9‑10 students in Tier‑2/3 cities. The pipeline ingests all NCERT Class 9 Physics chapters, creates a hybrid BM25 + semantic retriever, and generates grounded answers that are strictly sourced from the textbooks.
 
+## Current Status (Apr 2026)
+
+- Stage 1 is now **PDF-first** and loads Physics chapters from `corpus/iesc101.pdf` to `corpus/iesc112.pdf`.
+- If PDFs are unavailable, `stage1_corpus_prep.py` falls back to synthetic corpus only when available.
+- `main_1.py` Stage 1 now uses the same resilient loader as `stage1_corpus_prep.py` (no hard dependency on `corpus/ncert_corpus.py`).
+- Windows console encoding handling was added (`UTF-8`) to avoid `UnicodeEncodeError` on banner output.
+
+### Verified local run
+
+- Command: `python main_1.py --stage 1`
+- Result: success
+- Corpus source: real NCERT PDFs (Ch 1-12)
+- Generated output: `chunks/all_chunks.json`
+- Current chunk count from real PDFs
+
+### Windows quick start
+
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+pip install pymupdf rank-bm25 scikit-learn numpy transformers sentence-transformers
+python stage1_corpus_prep.py
+python main_1.py --stage 1
+```
+
 ---
 
 ## Table of Contents
@@ -50,17 +75,30 @@ Source: https://ncert.nic.in/textbook.php?iesc1=0-11 (PDFs **not** committed).
 
 ## Architecture
 
-```mermaid
+---
+config:
+  layout: elk
+---
 flowchart TD
     A[Student query] --> B[HybridRetriever]
     B --> C[BM25]
     B --> D[SentenceTransformer]
     C & D --> E[Reciprocal Rank Fusion]
     E --> F[GroundedAnswerSystem]
-    F --> G[LLM (Gemini 1.5 Flash)]
-    G --> H[Answer / Refusal]
-```
-
+    F --> G[LLM Gemini 1.5 Flash]
+    G --> H[Answer or Refusal]
+    
+    classDef input stroke:#818cf8,fill:#eef2ff,color:#1e1b4b
+    classDef process stroke:#2dd4bf,fill:#f0fdfa,color:#1e1b4b
+    classDef fusion stroke:#a78bfa,fill:#f5f3ff,color:#1e1b4b
+    classDef llm stroke:#fb923c,fill:#fff7ed,color:#1e1b4b
+    classDef output stroke:#4ade80,fill:#f0fdf4,color:#1e1b4b
+    
+    class A input
+    class B,C,D process
+    class E,F fusion
+    class G llm
+    class H output
 ---
 
 ## Why Two Retrievers?
@@ -126,113 +164,14 @@ Ncert_Rag/
 
 ## Script Descriptions
 
-* **stage1_corpus_prep.py** – Loads PDFs (or synthetic text), cleans, classifies content, and chunks the corpus (≈300‑word chunks with 50‑word overlap).
+* **stage1_corpus_prep.py** – Loads PDFs, cleans, classifies content, and chunks the corpus (≈300‑word chunks with 50‑word overlap).
 * **stage2_retrieval.py** – Builds a BM25 lexical index and a Sentence‑Transformer dense index, then fuses results with Reciprocal Rank Fusion.
 * **stage3_generation.py** – Calls the LLM (mock Gemini or real API) with a prompting template that forces grounded answers and explicit refusals for out‑of‑scope queries.
 * **stage4_evaluation.py** – Executes a 25‑question test set, compares answers to ground truth, and produces the tables you see below.
 * **failure_modes.md** – Analyses common failure patterns and suggested mitigations.
 * **reflection.md** – Developer reflection questionnaire.
 
----
 
-## Sample Pipeline Output
-
-<details>
-<summary>Click to expand full run output</summary>
-
-```
-══════════════════════════════════════════════════════════════════════
-│               NCERT Class 9 Physics RAG                         │
-══════════════════════════════════════════════════════════════════════
-  Started  : 2026-04-26  13:11:20
-  Stage    : all
-  API      : mock generation
-  Chunks   : target=300 words, overlap=50 words
-  Chat     : no
-  Skip eval: no
-
-──────────────────────────────────────────────────────────────────────
-  STAGE 1  CORPUS PREPARATION
-──────────────────────────────────────────────────────────────────────
-
-  ▸ Importing corpus module …
-  ▸ Importing stage 1 functions …
-
-  ────────────────────────────────────────────────────────────────
-  1B  Text Cleaning
-  ────────────────────────────────────────────────────────────────
-  ✓ Chapter 8: Motion                           -  8 chars cleaned
-  ✓ Chapter 9: Force and Laws of Motion         -  2 chars cleaned
-  ✓ Chapter 10: Gravitation                     - -2 chars cleaned
-  ✓ Chapter 11: Work and Energy                 -  2 chars cleaned
-  ✓ Chapter 12: Sound                           -  0 chars cleaned
-
-  ────────────────────────────────────────────────────────────────
-  1C  Content Classification  (Chapter 10 sample)
-  ────────────────────────────────────────────────────────────────
-    concept               : 34
-    equation              : 1
-    example_problem       : 2
-    exercise              : 3
-    section_header        : 5
-
-  ────────────────────────────────────────────────────────────────
-  1D  Tokenizer Comparison
-  ────────────────────────────────────────────────────────────────
-  Passage        Whitespace    BPE-style    WordPiece
-  ────────────────────────────────────────────────────────────────
-  Passage 1              24           31           31
-  …
-
-  ────────────────────────────────────────────────────────────────
-  1E  Chunking  (target=300 words, overlap=50 words)
-  ────────────────────────────────────────────────────────────────
-  ▸ Building chunks for all 5 chapters …
-  ✓ Chapter 8: Motion                             7 chunks
-  ✓ Chapter 9: Force and Laws of Motion           6 chunks
-  ✓ Chapter 10: Gravitation                       6 chunks
-  ✓ Chapter 11: Work and Energy                  11 chunks
-  ✓ Chapter 12: Sound                             6 chunks
-  ✓ Total chunks: 36  |  words: min=29, max=296, avg=134
-
-──────────────────────────────────────────────────────────────────────
-  STAGE 2  DUAL RETRIEVAL  (BM25 + Sentence Transformer + Hybrid RRF)
-──────────────────────────────────────────────────────────────────────
-
-  2A  BM25 Index: 36 chunks, avg 80 tokens/chunk
-  2B  SentenceTransformer: 36 chunks × 3065 vocab dims
-  2C  Hybrid retriever ready (36 chunks)
-
-  Retriever Comparison  (5 test queries)
-  Query                                          BM25   Semantic   Hybrid
-  What is Newton's second law of motion?            ✓       ✓        ✓
-  …
-
-──────────────────────────────────────────────────────────────────────
-  STAGE 3  GROUNDED ANSWER GENERATION
-──────────────────────────────────────────────────────────────────────
-
-  Q1 (Direct — Ch9):      Newton's Second Law → ANSWERED ✓
-  Q2 (Cross‑chapter):     KE vs PE            → ANSWERED ✓
-  Q6 (Out‑of‑scope):     Photosynthesis      → REFUSAL  ✓
-  …
-
-──────────────────────────────────────────────────────────────────────
-  STAGE 4  EVALUATION  (25 questions · 5 chapters)
-──────────────────────────────────────────────────────────────────────
-
-  Type           Result                 Ch     Question
-  ✗ Q01  direct         wrong                  Ch8    …
-  ✓ Q03  direct         correct                Ch8    …
-  …
-
-  ───── Evaluation Summary ─────
-  direct   : 16 total – 6 correct, 3 partial, 7 wrong
-  paraphrased: 7 total – 1 correct, 2 partial, 4 wrong
-  out‑of‑scope: 2 correct refusals
-  Overall score: 9/25 = 36%
-```
-</details>
 
 ---
 
@@ -460,18 +399,7 @@ def encode(self, texts):
 | Correct refusals | 2/2 (100%) | V2 prompt explicit refusal instruction |
 | Partial answers | 8/25 | Key-term scorer too strict; semantic match needed |
 
-**Score by chapter:**
 
-| Chapter | Questions | Correct | Partial | Wrong |
-|---------|-----------|---------|---------|-------|
-| Ch 8: Motion | 5 | 2 | 1 | 2 |
-| Ch 9: Force | 5 | 1 | 1 | 3 |
-| Ch 10: Gravitation | 5 | 2 | 2 | 1 |
-| Ch 11: Work/Energy | 4 | 1 | 3 | 0 |
-| Ch 12: Sound | 4 | 2 | 1 | 1 |
-| Out-of-scope | 2 | 2 | 0 | 0 |
-
----
 
 ## Known Failures and Fixes
 
@@ -504,28 +432,6 @@ if chunks[0].get('rrf_score', 0) < SCORE_THRESHOLD:
 
 ---
 
-## File Structure
-
-```
-ncert_v2/
-├── corpus/
-│   └── ncert_corpus.py          # All 5 chapter texts (real PDF equivalent)
-├── chunks/
-│   └── all_chunks.json          # 39 chunks with metadata
-├── eval/
-│   ├── evaluation_results.csv
-│   └── evaluation_results.md
-├── stage1_corpus_prep.py        # Cleaning · tokenizer comparison · chunking
-├── stage2_retrieval.py          # BM25 + SentenceTransformer + Hybrid RRF
-├── stage3_generation.py         # Prompt V1/V2 · grounded answer() function
-├── stage4_evaluation.py         # 25-question eval · retriever comparison
-├── failure_modes.md             # Grounded failure analysis (Advanced tier)
-├── reflection.md                # Full reflection questionnaire
-└── README.md                    # This file
-```
-
----
-
 ## Design Decisions
 
 | Decision | Choice | Reason |
@@ -546,11 +452,6 @@ If `ncert.nic.in` is unreachable, use **OpenStax College Physics** (CC-BY licens
 https://github.com/philschatz/physics-book
 
 ---
-
-## Sample Pipeline Output
-
-<details>
-<summary>Click to expand full run output</summary>
 
 ```
 ══════════════════════════════════════════════════════════════════════
