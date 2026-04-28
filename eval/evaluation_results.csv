@@ -1,26 +1,26 @@
 id,chapter,type,correctness,grounding,top_section,top_score,q
-Q01,Ch8,direct,wrong,grounded,8.6 EQUATIONS OF MOTION FOR UNIFORM ACCELERATION,0.03279,What are the three equations of uniformly accelerated motion?
-Q02,Ch8,direct,wrong,grounded,8.3 MEASURING THE RATE OF MOTION,0.03279,What is the difference between uniform and non-uniform motion?
-Q03,Ch8,direct,correct,grounded,8.3 MEASURING THE RATE OF MOTION,0.03279,An object travels 16 m in 4 s then 16 m in 2 s. What is average speed?
-Q04,Ch8,paraphrased,correct,grounded,8.6 EQUATIONS OF MOTION FOR UNIFORM ACCELERATION,0.03279,How do you find the speed of an object from its distance-time graph?
-Q05,Ch8,paraphrased,partial,grounded,8.4 RATE OF CHANGE OF VELOCITY — ACCELERATION,0.03279,What happens to the velocity of an object moving in a circle at constant speed?
-Q06,Ch9,direct,correct,grounded,9.3 SECOND LAW OF MOTION,0.03252,State Newton's second law of motion and write its formula.
-Q07,Ch9,direct,partial,grounded,9.5 CONSERVATION OF MOMENTUM,0.03279,A bullet of 20 g is fired from 4 kg gun at 400 m/s. Find recoil velocity.
-Q08,Ch9,direct,wrong,grounded,9.3 SECOND LAW OF MOTION,0.03279,Why does dust come out of a carpet when beaten with a stick?
-Q09,Ch9,paraphrased,partial,grounded,9.3 SECOND LAW OF MOTION,0.03279,newton 2nd law force equal mass times acceleration explain
-Q10,Ch9,paraphrased,incorrect_refusal,na,9.5 CONSERVATION OF MOMENTUM,0.03227,"If I push a truck but it doesn't move, does it push me back?"
-Q11,Ch10,direct,wrong,grounded,10.2 FREE FALL,0.03279,State Newton's universal law of gravitation.
-Q12,Ch10,direct,correct,grounded,10.2 FREE FALL,0.03227,What is acceleration due to gravity and what is its value on Earth?
-Q13,Ch10,direct,correct,grounded,10.3 MASS AND WEIGHT,0.03279,An object of mass 10 kg. What is its weight on Moon? (g_moon=1.63 m/s²)
-Q14,Ch10,paraphrased,wrong,grounded,10.3 MASS AND WEIGHT,0.03252,Why is the weight of an object on Moon less than on Earth?
-Q15,Ch10,direct,wrong,ungrounded,10.5 BUOYANCY AND ARCHIMEDES' PRINCIPLE,0.03279,What is Archimedes principle and when does an object float?
-Q16,Ch11,direct,partial,grounded,11.2 ENERGY,0.03279,Define kinetic energy and write its formula.
-Q17,Ch11,direct,partial,grounded,11.4 POWER,0.03279,A lamp consumes 1000 J in 10 s. What is its power?
-Q18,Ch11,direct,incorrect_refusal,na,11.4 POWER,0.03279,What is the commercial unit of energy? How many joules is 1 kWh?
-Q19,Ch11,paraphrased,incorrect_refusal,na,11.2 ENERGY,0.03279,How much energy is stored in a ball of mass 2 kg at height 5 m? (g=10)
-Q20,Ch12,direct,correct,grounded,12.4 REFLECTION OF SOUND — ECHO,0.03252,"What is the speed of sound in air, water, and steel?"
-Q21,Ch12,direct,correct,grounded,12.4 REFLECTION OF SOUND — ECHO,0.03279,What is an echo and what is the minimum distance needed to hear it?
-Q22,Ch12,direct,wrong,grounded,12.6 ULTRASOUND,0.03279,A sonar gets echo in 4 s. Speed of sound in water = 1500 m/s. Find depth.
-Q23,Ch12,paraphrased,incorrect_refusal,na,12.3 CHARACTERISTICS OF SOUND,0.03279,What determines the pitch and loudness of a sound?
-Q24,OOS,out_of_scope,correct_refusal,na,8.3 MEASURING THE RATE OF MOTION,0.03226,Explain the process of photosynthesis in plants.
-Q25,OOS,out_of_scope,correct_refusal,na,12.3 CHARACTERISTICS OF SOUND,0.03202,How does electric current flow through a copper wire?
+Q01,Ch8,direct,wrong,grounded,Introduction,0.03226,What are the three equations of uniformly accelerated motion?
+Q02,Ch8,direct,partial,grounded,Introduction,0.03252,What is the difference between uniform and non-uniform motion?
+Q03,Ch8,direct,correct,grounded,Introduction,0.03226,An object travels 16 m in 4 s then 16 m in 2 s. What is average speed?
+Q04,Ch8,paraphrased,partial,grounded,Introduction,0.03226,How do you find the speed of an object from its distance-time graph?
+Q05,Ch8,paraphrased,wrong,grounded,Introduction,0.03279,What happens to the velocity of an object moving in a circle at constant speed?
+Q06,Ch9,direct,correct,grounded,Introduction,0.03252,State Newton's second law of motion and write its formula.
+Q07,Ch9,direct,partial,grounded,Introduction,0.03279,A bullet of 20 g is fired from 4 kg gun at 400 m/s. Find recoil velocity.
+Q08,Ch9,direct,incorrect_refusal,na,Introduction,0.03252,Why does dust come out of a carpet when beaten with a stick?
+Q09,Ch9,paraphrased,partial,grounded,Introduction,0.03175,newton 2nd law force equal mass times acceleration explain
+Q10,Ch9,paraphrased,incorrect_refusal,na,Introduction,0.03252,"If I push a truck but it doesn't move, does it push me back?"
+Q11,Ch10,direct,incorrect_refusal,na,Introduction,0.03279,State Newton's universal law of gravitation.
+Q12,Ch10,direct,correct,grounded,Introduction,0.03227,What is acceleration due to gravity and what is its value on Earth?
+Q13,Ch10,direct,correct,grounded,Introduction,0.03202,An object of mass 10 kg. What is its weight on Moon? (g_moon=1.63 m/s²)
+Q14,Ch10,paraphrased,wrong,grounded,Introduction,0.03202,Why is the weight of an object on Moon less than on Earth?
+Q15,Ch10,direct,incorrect_refusal,na,Introduction,0.03009,What is Archimedes principle and when does an object float?
+Q16,Ch11,direct,partial,grounded,Introduction,0.03202,Define kinetic energy and write its formula.
+Q17,Ch11,direct,partial,partial,Introduction,0.03279,A lamp consumes 1000 J in 10 s. What is its power?
+Q18,Ch11,direct,incorrect_refusal,na,Introduction,0.03252,What is the commercial unit of energy? How many joules is 1 kWh?
+Q19,Ch11,paraphrased,wrong,grounded,Introduction,0.03279,How much energy is stored in a ball of mass 2 kg at height 5 m? (g=10)
+Q20,Ch12,direct,correct,grounded,Introduction,0.03252,"What is the speed of sound in air, water, and steel?"
+Q21,Ch12,direct,correct,grounded,Introduction,0.03279,What is an echo and what is the minimum distance needed to hear it?
+Q22,Ch12,direct,wrong,grounded,Introduction,0.03202,A sonar gets echo in 4 s. Speed of sound in water = 1500 m/s. Find depth.
+Q23,Ch12,paraphrased,partial,grounded,Introduction,0.03279,What determines the pitch and loudness of a sound?
+Q24,OOS,out_of_scope,correct_refusal,na,Introduction,0.03252,Explain the process of photosynthesis in plants.
+Q25,OOS,out_of_scope,missed_refusal,grounded,Introduction,0.03227,How does electric current flow through a copper wire?

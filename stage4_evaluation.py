@@ -18,14 +18,14 @@ Retriever comparison:
   to show where each retriever adds value.
 """
 
-import sys, json, csv, re, os
+import sys, json, csv, re
 from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).parent
-sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, '/home/claude/ncert_v2')
+sys.path.insert(0, '/usr/local/lib/python3.12/dist-packages')
 
 from stage2_retrieval import HybridRetriever, BM25Retriever, SentenceTransformerRetriever
 from stage3_generation import GroundedAnswerSystem, mock_generate, build_context_block
+import os
 
 
 # ══════════════════════════════════════════════════════════════
@@ -387,10 +387,8 @@ def print_summary(results):
     return total_c, len(results)
 
 
-def save_results(results, out_dir=None):
-    if out_dir is None:
-        out_dir = str(PROJECT_ROOT / 'eval')
-    Path(out_dir).mkdir(parents=True, exist_ok=True)
+def save_results(results, out_dir='/Users/shubh/Project/Ncert_Rag/eval'):
+    Path(out_dir).mkdir(exist_ok=True)
 
     # CSV
     csv_path = f"{out_dir}/evaluation_results.csv"
@@ -423,7 +421,7 @@ if __name__ == "__main__":
     print("STAGE 4 — EVALUATION  (25 questions, 5 chapters)")
     print("═"*68)
 
-    chunks   = json.load(open(PROJECT_ROOT / 'chunks' / 'all_chunks.json'))
+    chunks   = json.load(open('/Users/shubh/Project/Ncert_Rag/chunks/all_chunks.json'))
     retriever = HybridRetriever(chunks)
     api_key   = os.environ.get('GEMINI_API_KEY', '')
     system    = GroundedAnswerSystem(retriever, api_key=api_key)

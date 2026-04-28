@@ -16,10 +16,34 @@ Each decision is explained inline with the reasoning behind it.
 import sys, re, json
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).parent
-sys.path.insert(0, str(PROJECT_ROOT))
-from corpus.ncert_corpus import ALL_CHAPTERS
+sys.path.insert(0, '/Users/shubh/Project/Ncert_Rag/corpus')
+# from ncert_corpus import ALL_CHAPTERS
+import fitz
 
+def load_all_chapters():
+    chapter_files = {
+        "Chapter 1: Matter in Our Surroundings":       "corpus/iesc101.pdf",
+        "Chapter 2: Is Matter Around Us Pure":         "corpus/iesc102.pdf",
+        "Chapter 3: Atoms and Molecules":              "corpus/iesc103.pdf",
+        "Chapter 4: Structure of the Atom":            "corpus/iesc104.pdf",
+        "Chapter 5: The Fundamental Unit of Life":     "corpus/iesc105.pdf",
+        "Chapter 6: Tissues":                          "corpus/iesc106.pdf",
+        "Chapter 7: Diversity in Living Organisms":    "corpus/iesc107.pdf",
+        "Chapter 8: Motion":                           "corpus/iesc108.pdf",
+        "Chapter 9: Force and Laws of Motion":         "corpus/iesc109.pdf",
+        "Chapter 10: Gravitation":                     "corpus/iesc110.pdf",
+        "Chapter 11: Work and Energy":                 "corpus/iesc111.pdf",
+        "Chapter 12: Sound":                           "corpus/iesc112.pdf",
+    }
+    chapters = {}
+    for name, path in chapter_files.items():
+        doc = fitz.open(path)
+        text = "".join(page.get_text() for page in doc)
+        chapters[name] = text
+        doc.close()
+    return chapters
+
+ALL_CHAPTERS = load_all_chapters()
 
 # ══════════════════════════════════════════════════════════════
 # 1A  PDF EXTRACTION  (real code – runs with actual files)
@@ -432,7 +456,7 @@ if __name__ == "__main__":
             print("  ...")
 
     # Save
-    out_path = PROJECT_ROOT / 'chunks' / 'all_chunks.json'
+    out_path = Path('/Users/shubh/Project/Ncert_Rag/chunks/all_chunks.json')
     out_path.parent.mkdir(exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(all_chunks, f, indent=2)

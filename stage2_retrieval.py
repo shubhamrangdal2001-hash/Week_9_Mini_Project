@@ -29,9 +29,9 @@ Every line is explained with the reasoning behind the decision.
 
 import sys, re, json, math
 import numpy as np
-from pathlib import Path
+sys.path.insert(0, '/usr/local/lib/python3.12/dist-packages')
 
-PROJECT_ROOT = Path(__file__).parent
+from pathlib import Path
 from rank_bm25 import BM25Okapi
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -365,8 +365,7 @@ if __name__ == "__main__":
     print("═"*68)
 
     # Load chunks from Stage 1
-    chunk_path = PROJECT_ROOT / 'chunks' / 'all_chunks.json'
-    chunks = json.load(open(chunk_path))
+    chunks = json.load(open('/Users/shubh/Project/Ncert_Rag/chunks/all_chunks.json'))
     print(f"\nLoaded {len(chunks)} chunks from Stage 1\n")
 
     print("Initialising retrievers:")
@@ -406,7 +405,6 @@ if __name__ == "__main__":
         'n_chunks': len(chunks),
         'vocab_size': retriever.sem_ret.corpus_matrix.shape[1]
     }
-    info_path = PROJECT_ROOT / 'chunks' / 'retriever_info.json'
-    with open(info_path, 'w') as f:
+    with open('/Users/shubh/Project/Ncert_Rag/chunks/retriever_info.json', 'w') as f:
         json.dump(retriever_data, f)
     print("\n✓ Retrieval system ready for Stage 3")

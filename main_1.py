@@ -200,21 +200,92 @@ def run_stage1(chunk_size: int = 300, overlap: int = 50) -> list:
     """
     stage_header(1, "CORPUS PREPARATION")
 
-    step("Importing corpus module …")
-    try:
-        from corpus.ncert_corpus import ALL_CHAPTERS
-    except ImportError as e:
-        fail(f"Cannot import corpus: {e}\n  Make sure corpus/ncert_corpus.py exists.")
-
     step("Importing stage 1 functions …")
-    from stage1_corpus_prep import (
-        clean_text,
-        classify_paragraph,
-        compare_tokenizers,
-        split_into_paragraphs,
-        chunk_chapter,
-        build_full_chunk_store,
+    import inspect
+    import importlib
+
+    # ── Import the module first so we can inspect it ──────────
+    try:
+        _s1 = importlib.import_module("stage1_corpus_prep")
+    except ModuleNotFoundError:
+        fail("stage1_corpus_prep.py not found. Make sure it is in the "
+             "same directory as main.py.")
+
+    # ── Locate the corpus-loader (callable or plain dict) ─────
+    # Try every reasonable name the function might have been exported as.
+    _CORPUS_FN_NAMES = (
+        "stage1_input_corpus",   # original expected name
+        "get_input_corpus",
+        "input_corpus",
+        "load_corpus",
+        "get_corpus",
+        "get_all_chapters",
+        "load_all_chapters",
+        "get_chapters",
+        "load_chapters",
     )
+    _CORPUS_DICT_NAMES = (
+        "ALL_CHAPTERS", "CHAPTERS", "all_chapters", "chapters",
+    )
+
+    _corpus_loader = None
+
+    # 1) Check for a callable under any known function name
+    for _fname in _CORPUS_FN_NAMES:
+        if callable(getattr(_s1, _fname, None)):
+            _corpus_loader = getattr(_s1, _fname)
+            ok(f"Corpus loader found: stage1_corpus_prep.{_fname}()")
+            break
+
+    # 2) Fall back to a module-level dict variable
+    if _corpus_loader is None:
+        for _dname in _CORPUS_DICT_NAMES:
+            _val = getattr(_s1, _dname, None)
+            if isinstance(_val, dict):
+                _corpus_loader = lambda _v=_val: _v   # wrap in callable
+                ok(f"Corpus dict found: stage1_corpus_prep.{_dname}")
+                break
+
+    # 3) Nothing matched — report what IS available and stop
+    if _corpus_loader is None:
+        _available_fns = [
+            n for n, _ in inspect.getmembers(_s1, inspect.isfunction)
+        ]
+        _available_dicts = [
+            n for n in dir(_s1)
+            if isinstance(getattr(_s1, n, None), dict)
+        ]
+        fail(
+            f"Cannot find a corpus-loader in stage1_corpus_prep.\n"
+            f"    Functions found : {_available_fns}\n"
+            f"    Dicts found     : {_available_dicts}\n"
+            f"    Expected one of : {list(_CORPUS_FN_NAMES)}\n"
+            f"    Or a dict named : {list(_CORPUS_DICT_NAMES)}\n"
+            f"    → Rename your corpus function/variable in "
+            f"stage1_corpus_prep.py to match one of the names above."
+        )
+
+    # ── Import the remaining stage-1 helpers normally ─────────
+    try:
+        from stage1_corpus_prep import (
+            clean_text,
+            classify_paragraph,
+            compare_tokenizers,
+            split_into_paragraphs,
+            chunk_chapter,
+            build_full_chunk_store,
+        )
+    except ImportError as e:
+        fail(f"Missing function in stage1_corpus_prep: {e}\n"
+             f"    Ensure clean_text, classify_paragraph, "
+             f"compare_tokenizers, split_into_paragraphs, "
+             f"chunk_chapter, and build_full_chunk_store are all defined.")
+
+    step("Loading Stage 1 corpus source …")
+    try:
+        ALL_CHAPTERS = _corpus_loader()
+    except Exception as e:
+        fail(f"Cannot load Stage 1 corpus: {e}")
 
     # ── 1B: Clean all chapters ────────────────────────────────
     section("1B  Text Cleaning")
@@ -877,5 +948,13 @@ def run_pipeline(args: argparse.Namespace) -> None:
 # ══════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
+    # Windows consoles often default to cp1252 which cannot print box-drawing
+    # characters used in banners. Reconfigure to UTF-8 if supported.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
     args = parse_args()
     run_pipeline(args)

@@ -1,4 +1,4 @@
-# reflection.md — Week 9 Mini-Project (Updated with Sentence Transformer + 12 Chapters)
+# reflection.md — Week 9 Mini-Project (Updated with Sentence Transformer + 5 Chapters)
 
 ---
 

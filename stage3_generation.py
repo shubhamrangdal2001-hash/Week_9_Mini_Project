@@ -14,10 +14,8 @@ Key design decisions explained line by line:
 """
 
 import sys, re, json, os
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).parent
-sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, '/Users/shubh/Project/Ncert_Rag')
+sys.path.insert(0, '/usr/local/lib/python3.12/dist-packages')
 
 from stage2_retrieval import HybridRetriever, BM25Retriever, SentenceTransformerRetriever
 
@@ -363,7 +361,7 @@ if __name__ == "__main__":
     print("STAGE 3 — GROUNDED ANSWER GENERATION")
     print("═"*68)
 
-    chunks = json.load(open(PROJECT_ROOT / 'chunks' / 'all_chunks.json'))
+    chunks = json.load(open('/Users/shubh/Project/Ncert_Rag/chunks/all_chunks.json'))
 
     print("\nInitialising system...")
     retriever = HybridRetriever(chunks)

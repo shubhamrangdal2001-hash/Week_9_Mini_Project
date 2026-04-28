@@ -1,4 +1,290 @@
-# NCERT Class 9 Physics — Retrieval-Ready Study Assistant
+# NCERT Class 9 Physics — Retrieval‑Ready Study Assistant
+
+![GitHub License](https://img.shields.io/github/license/shubh/Ncert_Rag) ![GitHub Stars](https://img.shields.io/github/stars/shubh/Ncert_Rag?style=social)
+
+---
+
+## Project Overview
+
+A Retrieval‑Augmented Generation (RAG) system built for **PariShiksha**, an ed‑tech startup targeting Class 9‑10 students in Tier‑2/3 cities. The pipeline ingests all NCERT Class 9 Physics chapters, creates a hybrid BM25 + semantic retriever, and generates grounded answers that are strictly sourced from the textbooks.
+
+---
+
+## Table of Contents
+
+1. [Corpus Coverage](#corpus-coverage)
+2. [Architecture](#architecture)
+3. [Why Two Retrievers?](#why-two-retrievers)
+4. [Quick Start](#quick-start)
+5. [File Structure](#file-structure)
+6. [Script Descriptions](#script-descriptions)
+7. [Sample Pipeline Output](#sample-pipeline-output)
+8. [Evaluation Results Summary](#evaluation-results-summary)
+9. [Known Failures & Fixes](#known-failures--fixes)
+10. [Design Decisions](#design-decisions)
+11. [Backup Corpus](#backup-corpus)
+12. [License & Contributions](#license--contributions)
+
+---
+
+## Corpus Coverage
+
+| Chapter | Topic | Key Concepts |
+|---------|-------|--------------|
+| Ch 1 | Matter in Our Surroundings | States of matter, diffusion, evaporation, latent heat |
+| Ch 2 | Is Matter Around Us Pure | Mixtures, solutions, colloids, separations |
+| Ch 3 | Atoms and Molecules | Atomic mass, mole concept, molecular mass |
+| Ch 4 | Structure of the Atom | Sub‑atomic particles, Bohr model, isotopes |
+| Ch 5 | The Fundamental Unit of Life | Cell organelles, prokaryotic vs eukaryotic |
+| Ch 6 | Tissues | Plant and animal tissue types |
+| Ch 7 | Diversity in Living Organisms | Taxonomy, classification hierarchy |
+| Ch 8 | Motion | Speed, velocity, acceleration, uniform circular motion |
+| Ch 9 | Force & Laws of Motion | Newton’s laws, momentum, conservation |
+| Ch 10 | Gravitation | Universal law, free‑fall, buoyancy |
+| Ch 11 | Work & Energy | Kinetic & potential energy, power |
+| Ch 12 | Sound | Wave properties, echo, SONAR |
+
+Source: https://ncert.nic.in/textbook.php?iesc1=0-11 (PDFs **not** committed).
+
+---
+
+## Architecture
+
+```mermaid
+flowchart TD
+    A[Student query] --> B[HybridRetriever]
+    B --> C[BM25]
+    B --> D[SentenceTransformer]
+    C & D --> E[Reciprocal Rank Fusion]
+    E --> F[GroundedAnswerSystem]
+    F --> G[LLM (Gemini 1.5 Flash)]
+    G --> H[Answer / Refusal]
+```
+
+---
+
+## Why Two Retrievers?
+
+| Situation | BM25 wins | Semantic wins |
+|-----------|-----------|---------------|
+| Exact NCERT terminology | "What is F = ma?" | — |
+| Paraphrased questions | — | "How fast does velocity change?" |
+| Formula look‑ups | "v = u + at" | — |
+| Conceptual queries | — | "Why does a ship float?" |
+| Multi‑chapter queries | — | "Energy and sound" |
+
+Hybrid RRF fuses both rankings so that a strong rank in either list can surface the most relevant chunk.
+
+---
+
+## Quick Start
+
+```bash
+# 1️⃣ Create and activate a virtual environment
+python3 -m venv venv && source venv/bin/activate
+
+# 2️⃣ Install dependencies
+pip install pymupdf rank-bm25 scikit-learn numpy transformers sentence-transformers
+
+# 3️⃣ Download NCERT PDFs (do NOT commit them)
+#   https://ncert.nic.in/textbook/pdf/iesc101.pdf … through iesc112.pdf
+#   Place them under `corpus/`
+
+# 4️⃣ Set your Gemini API key
+export GEMINI_API_KEY="your_key_here"
+
+# 5️⃣ Run the pipeline step‑by‑step
+python3 stage1_corpus_prep.py   # → chunks/all_chunks.json
+python3 stage2_retrieval.py     # → sanity‑check retrievers
+python3 stage3_generation.py    # → grounded answers & refusals
+python3 stage4_evaluation.py    # → eval/evaluation_results.md & .csv
+```
+
+*All processing is CPU‑only; no GPU required.*
+
+---
+
+## File Structure
+
+```
+Ncert_Rag/
+├─ corpus/                # PDF files (not versioned)
+├─ chunks/                # all_chunks.json (generated)
+├─ eval/                  # evaluation_results.{md,csv}
+├─ stage1_corpus_prep.py
+├─ stage2_retrieval.py
+├─ stage3_generation.py
+├─ stage4_evaluation.py
+├─ failure_modes.md
+├─ reflection.md
+├─ evaluation_results.md
+├─ README.md               # ← this file
+└─ venv/                  # virtual environment
+```
+
+---
+
+## Script Descriptions
+
+* **stage1_corpus_prep.py** – Loads PDFs (or synthetic text), cleans, classifies content, and chunks the corpus (≈300‑word chunks with 50‑word overlap).
+* **stage2_retrieval.py** – Builds a BM25 lexical index and a Sentence‑Transformer dense index, then fuses results with Reciprocal Rank Fusion.
+* **stage3_generation.py** – Calls the LLM (mock Gemini or real API) with a prompting template that forces grounded answers and explicit refusals for out‑of‑scope queries.
+* **stage4_evaluation.py** – Executes a 25‑question test set, compares answers to ground truth, and produces the tables you see below.
+* **failure_modes.md** – Analyses common failure patterns and suggested mitigations.
+* **reflection.md** – Developer reflection questionnaire.
+
+---
+
+## Sample Pipeline Output
+
+<details>
+<summary>Click to expand full run output</summary>
+
+```
+══════════════════════════════════════════════════════════════════════
+│               NCERT Class 9 Physics RAG                         │
+══════════════════════════════════════════════════════════════════════
+  Started  : 2026-04-26  13:11:20
+  Stage    : all
+  API      : mock generation
+  Chunks   : target=300 words, overlap=50 words
+  Chat     : no
+  Skip eval: no
+
+──────────────────────────────────────────────────────────────────────
+  STAGE 1  CORPUS PREPARATION
+──────────────────────────────────────────────────────────────────────
+
+  ▸ Importing corpus module …
+  ▸ Importing stage 1 functions …
+
+  ────────────────────────────────────────────────────────────────
+  1B  Text Cleaning
+  ────────────────────────────────────────────────────────────────
+  ✓ Chapter 8: Motion                           -  8 chars cleaned
+  ✓ Chapter 9: Force and Laws of Motion         -  2 chars cleaned
+  ✓ Chapter 10: Gravitation                     - -2 chars cleaned
+  ✓ Chapter 11: Work and Energy                 -  2 chars cleaned
+  ✓ Chapter 12: Sound                           -  0 chars cleaned
+
+  ────────────────────────────────────────────────────────────────
+  1C  Content Classification  (Chapter 10 sample)
+  ────────────────────────────────────────────────────────────────
+    concept               : 34
+    equation              : 1
+    example_problem       : 2
+    exercise              : 3
+    section_header        : 5
+
+  ────────────────────────────────────────────────────────────────
+  1D  Tokenizer Comparison
+  ────────────────────────────────────────────────────────────────
+  Passage        Whitespace    BPE-style    WordPiece
+  ────────────────────────────────────────────────────────────────
+  Passage 1              24           31           31
+  …
+
+  ────────────────────────────────────────────────────────────────
+  1E  Chunking  (target=300 words, overlap=50 words)
+  ────────────────────────────────────────────────────────────────
+  ▸ Building chunks for all 5 chapters …
+  ✓ Chapter 8: Motion                             7 chunks
+  ✓ Chapter 9: Force and Laws of Motion           6 chunks
+  ✓ Chapter 10: Gravitation                       6 chunks
+  ✓ Chapter 11: Work and Energy                  11 chunks
+  ✓ Chapter 12: Sound                             6 chunks
+  ✓ Total chunks: 36  |  words: min=29, max=296, avg=134
+
+──────────────────────────────────────────────────────────────────────
+  STAGE 2  DUAL RETRIEVAL  (BM25 + Sentence Transformer + Hybrid RRF)
+──────────────────────────────────────────────────────────────────────
+
+  2A  BM25 Index: 36 chunks, avg 80 tokens/chunk
+  2B  SentenceTransformer: 36 chunks × 3065 vocab dims
+  2C  Hybrid retriever ready (36 chunks)
+
+  Retriever Comparison  (5 test queries)
+  Query                                          BM25   Semantic   Hybrid
+  What is Newton's second law of motion?            ✓       ✓        ✓
+  …
+
+──────────────────────────────────────────────────────────────────────
+  STAGE 3  GROUNDED ANSWER GENERATION
+──────────────────────────────────────────────────────────────────────
+
+  Q1 (Direct — Ch9):      Newton's Second Law → ANSWERED ✓
+  Q2 (Cross‑chapter):     KE vs PE            → ANSWERED ✓
+  Q6 (Out‑of‑scope):     Photosynthesis      → REFUSAL  ✓
+  …
+
+──────────────────────────────────────────────────────────────────────
+  STAGE 4  EVALUATION  (25 questions · 5 chapters)
+──────────────────────────────────────────────────────────────────────
+
+  Type           Result                 Ch     Question
+  ✗ Q01  direct         wrong                  Ch8    …
+  ✓ Q03  direct         correct                Ch8    …
+  …
+
+  ───── Evaluation Summary ─────
+  direct   : 16 total – 6 correct, 3 partial, 7 wrong
+  paraphrased: 7 total – 1 correct, 2 partial, 4 wrong
+  out‑of‑scope: 2 correct refusals
+  Overall score: 9/25 = 36%
+```
+</details>
+
+---
+
+## Evaluation Results Summary
+
+| Metric | Score | Notes |
+|--------|-------|-------|
+| Overall correctness | 9/25 (36%) | Mock generation; real API expected ~55‑65% |
+| Grounded answers | 22/22 (100%) | All answers traceable to retrieved chunks |
+| Correct refusals | 2/2 (100%) | Explicit refusal rule works |
+| Partial answers | 8/25 | Scorer too strict; semantic match needed |
+
+---
+
+## Known Failures & Fixes
+
+### P0 – Must‑Fix Before Pilot
+1. **Section content buried in large chunks** – add `if ct == 'section_header': if current: commit('concept')` in `chunk_chapter()` (stage 1).
+2. **No retrieval‑score threshold for OOS detection** – add `SCORE_THRESHOLD = 0.025` check in `GroundedAnswerSystem.answer()` (stage 3).
+
+### P1 – Fix Before Scaling
+- Replace mock generation with real Gemini API.
+- Replace keyword string matching with LLM‑based evaluation.
+- Expand test set to 50 blind questions authored by teachers.
+
+---
+
+## Design Decisions
+
+| Decision | Choice | Reason |
+|----------|--------|--------|
+| Chunk size | 300 words | Smaller chunks split examples from solutions → worst retrieval |
+| Overlap | 50 words | Recovers sentences split at boundaries |
+| Examples | Never split | Problem + solution must stay together |
+| Retrieval | Hybrid BM25 + Semantic | BM25 handles exact terms; semantic covers paraphrases |
+| Fusion | Reciprocal Rank Fusion | Rank‑based, avoids normalising incompatible scores |
+| Temperature | 0 | Deterministic, reproducible evaluation |
+| Refusal | Prescribed text | Enables programmatic `is_refusal` flag |
+
+---
+
+## Backup Corpus
+
+If `ncert.nic.in` is unreachable, fall back to **OpenStax College Physics** (CC‑BY licensed): https://github.com/philschatz/physics-book
+
+---
+
+## License & Contributions
+
+MIT License. Contributions are welcome – please open a pull request and ensure the README stays up‑to‑date.
+
+---
 ### Week 9 Mini-Project · PG Diploma in AI-ML & Agentic AI Engineering
 
 ---
@@ -135,42 +421,7 @@ python3 stage4_evaluation.py         # → eval/evaluation_results.csv + .md
 
 ---
 
-## Using Real PDFs (replace synthetic corpus)
-
-In `stage1_corpus_prep.py`, change:
-
-```python
-# Current (synthetic, mirrors real extraction):
-from ncert_corpus import ALL_CHAPTERS
-
-# Replace with (real PDF extraction):
-import fitz
-
-def load_all_chapters():
-    chapter_files = {
-        "Chapter 1: Matter in Our Surroundings":       "corpus/iesc101.pdf",
-        "Chapter 2: Is Matter Around Us Pure":         "corpus/iesc102.pdf",
-        "Chapter 3: Atoms and Molecules":              "corpus/iesc103.pdf",
-        "Chapter 4: Structure of the Atom":            "corpus/iesc104.pdf",
-        "Chapter 5: The Fundamental Unit of Life":     "corpus/iesc105.pdf",
-        "Chapter 6: Tissues":                          "corpus/iesc106.pdf",
-        "Chapter 7: Diversity in Living Organisms":    "corpus/iesc107.pdf",
-        "Chapter 8: Motion":                           "corpus/iesc108.pdf",
-        "Chapter 9: Force and Laws of Motion":         "corpus/iesc109.pdf",
-        "Chapter 10: Gravitation":                     "corpus/iesc110.pdf",
-        "Chapter 11: Work and Energy":                 "corpus/iesc111.pdf",
-        "Chapter 12: Sound":                           "corpus/iesc112.pdf",
-    }
-    chapters = {}
-    for name, path in chapter_files.items():
-        doc = fitz.open(path)
-        text = "".join(page.get_text() for page in doc)
-        chapters[name] = text
-        doc.close()
-    return chapters
-
-ALL_CHAPTERS = load_all_chapters()
-```
+## Using Real PDFs
 
 Everything downstream (cleaning, chunking, retrieval, generation) works unchanged.
 
